@@ -9,6 +9,8 @@ A long-term goal is to use [CUDA](https://developer.nvidia.com/cuda-zone) for ot
 
 If you are interested to contribute, please check [here](./CONTRIBUTING.md).
 
+[![Build Status](https://travis-ci.org/dimakura/SwanKit.svg?branch=master)](https://travis-ci.org/dimakura/SwanKit)
+
 # Using SwanKit
 
 ## Tensors and operations
