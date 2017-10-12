@@ -1,4 +1,6 @@
-.DS_Store
 /.build
+/docs
+/tmp
 /Packages
 /*.xcodeproj
+.DS_Store

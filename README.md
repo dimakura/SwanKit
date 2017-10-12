@@ -16,6 +16,8 @@ If you are interested to contribute, please check [here](./CONTRIBUTING.md).
 To create a tensor use `SWKTensor` class:
 
 ```swift
+import SwanKit
+
 let a = SWKTensor(2, 2)
 let b = SWKTensor(content: [[1, 2], [3, 4]])
 ```
