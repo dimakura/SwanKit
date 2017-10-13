@@ -33,4 +33,5 @@ jazzy \
   --github-file-prefix $GITHUB_FILE_PREFIX \
   --module-version $VERSION \
   --module SwanKit \
-  --root-url https://swankit.org/docs
+  --root-url https://swankit.org/docs \
+  --theme fullwidth
