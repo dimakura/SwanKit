@@ -30,8 +30,19 @@ class SWKSizeTest: XCTestCase {
     XCTAssertEqual(size.t, 4)
   }
 
+  func testDimensionality() {
+    let s1 = SWKSize(1)
+    let s2 = SWKSize(1, 2)
+    let s3 = SWKSize(1, 2, 3)
+    XCTAssertEqual(s1.dimensions, 1)
+    XCTAssertEqual(s2.dimensions, 2)
+    XCTAssertEqual(s3.dimensions, 3)
+    XCTAssertEqual(size.dimensions, 4)
+  }
+
   static var allTests = [
     ("testSubscriptAccess", testSubscriptAccess),
     ("testPropertyAccess", testPropertyAccess),
+    ("testDimensionality", testDimensionality),
   ]
 }
