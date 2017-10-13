@@ -15,21 +15,34 @@ To create `SWKSize` of size `5x3`:
 let size = SWKSize(5, 3)
 ````
 
-You can access size of a dimension by subscript:
-
-```swift
-size[0] // = 5
-size[1] // = 3
-```
-
-Or using accessors `x` and `y` for two initial dimensions (there are also `z` and `t` for third and forth dimensions):
-
-```swift
-size.x // = 5
-size.y // = 3
-```
-
 **Note**: `SWKSize` is an immutable data structure: once created you cannot change its properties.
+
+You can access dimensionality of `SWKSize` instance using `dimensions` property:
+
+```swift
+size.dimensions // 2
+```
+
+You can access size of a dimension using subscripts:
+
+```swift
+size[0] // 5
+size[1] // 3
+```
+
+Or using properties `x` and `y` for two initial dimensions:
+
+```swift
+size.x // 5
+size.y // 3
+```
+
+There are also `z` and `t` properties for third and forth dimensions:
+
+```swift
+size.z // Throws out of index exception
+size.t // Throws out of index exception
+```
 */
 struct SWKSize {
 
@@ -43,6 +56,13 @@ struct SWKSize {
   subscript(index: Int) -> Int {
     get {
       return _dimensions[index]
+    }
+  }
+
+  /// Dimensionality of this size.
+  var dimensions: Int {
+    get {
+      return _dimensions.count
     }
   }
 
