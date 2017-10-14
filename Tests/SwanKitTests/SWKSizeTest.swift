@@ -46,4 +46,5 @@ class SWKSizeTest: XCTestCase {
     ("testPropertyAccess", testPropertyAccess),
     ("testDimensionality", testDimensionality),
   ]
+
 }
