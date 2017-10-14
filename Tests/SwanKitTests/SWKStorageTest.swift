@@ -27,9 +27,20 @@ class SWKStorageTest: XCTestCase {
     }
   }
 
+  func testElementSizes() {
+    XCTAssertEqual(SWKByteStorage(1).elementSize,   1)
+    XCTAssertEqual(SWKShortStorage(1).elementSize,  2)
+    XCTAssertEqual(SWKIntStorage(1).elementSize,    4)
+    XCTAssertEqual(SWKLongStorage(1).elementSize,   8)
+
+    XCTAssertEqual(SWKFloatStorage(1).elementSize,  4)
+    XCTAssertEqual(SWKDoubleStorage(1).elementSize, 8)
+  }
+
   static var allTests = [
     ("testInitializationWithSize", testInitializationWithSize),
-    ("testInitializationWithArray", testInitializationWithArray)
+    ("testInitializationWithArray", testInitializationWithArray),
+    ("testElementSizes", testElementSizes)
   ]
 
 }

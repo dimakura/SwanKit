@@ -13,10 +13,11 @@
 public class SWKStorageBase<T> {
 
   // https://developer.apple.com/documentation/swift/unsafemutablepointer
-  private var _ptr: UnsafeMutablePointer<T>
-
   // https://developer.apple.com/documentation/swift/unsafemutablebufferpointer
+  private var _ptr: UnsafeMutablePointer<T>
   private var _buffer: UnsafeMutableBufferPointer<T>
+
+  fileprivate var _device: SWKDevice?
 
   /// Creates uninitialized storage of given size.
   public init(_ size: Int) {
@@ -37,13 +38,16 @@ public class SWKStorageBase<T> {
 
   public subscript(index: Int) -> T {
     get {
+      assert(index >= 0 && index < size, "Index out of bounds: \(index)", file: #file, line: #line)
       return _buffer[index]
     }
     set {
+      assert(index >= 0 && index < size, "Index out of bounds: \(index)", file: #file, line: #line)
       _buffer[index] = newValue
     }
   }
 
+  /// Number of elements in this storage.
   public var size: Int {
     return _buffer.count
   }
@@ -53,13 +57,39 @@ public class SWKStorageBase<T> {
     return MemoryLayout<T>.stride
   }
 
+  /// Current device for this store.
+  public var device: SWKDevice {
+    if let dev = _device {
+      return dev;
+    }
+
+    return SWKDevice.defaultDevice
+  }
+
+  /// Is storage reeady for CPU?
+  public var isCPU: Bool {
+    return device.isCPU
+  }
+
+  /// Is storage reeady for GPU?
+  public var isGPU: Bool {
+    return device.isGPU
+  }
+
+  /// Converts this storage for use with CPU.
+  public func cpu() -> SWKStorageBase<T> {
+    fatalError("Not implemented", file: #file, line: #line)
+  }
+
+  /// Converts this storage for use with GPU.
+  public func gpu(device: SWKDevice = .Metal) -> SWKStorageBase<T> {
+    fatalError("Not implemented", file: #file, line: #line)
+  }
+
 }
 
 /// Byte storage.
 public typealias SWKByteStorage  = SWKStorageBase<Int8>
-
-/// Character storage.
-public typealias SWKCharStorage  = SWKStorageBase<Character>
 
 /// Short storage.
 public typealias SWKShortStorage = SWKStorageBase<Int16>
@@ -84,7 +114,6 @@ A `SWKStorage` is collection of `Float` data type.
 There are also predefined storages for other primitive data types:
 
 - `SWKByteStorage`, corresponding to Swift's `Int8` type;
-- `SWKCharStorage`, corresponding to Swift's `Character` type;
 - `SWKShortStorage`, corresponding to Swift's `Int16` type;
 - `SWKIntStorage`, corresponding to Swift's `Int32` type;
 - `SWKLongStorage`, corresponding to Swift's `Int64` type;
