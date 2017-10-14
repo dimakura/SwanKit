@@ -13,10 +13,10 @@ import XCTest
 class SWKDeviceTest: XCTestCase {
 
   func testDefaultDevice() {
-    XCTAssertEqual(SWKDevice.defaultDevice, SWKDevice.CPU)
+    XCTAssertEqual(SWKDevice.currentDevice, SWKDevice.CPU)
 
-    SWKDevice.defaultDevice = .Metal
-    XCTAssertEqual(SWKDevice.defaultDevice, .Metal)
+    SWKDevice.currentDevice = .Metal
+    XCTAssertEqual(SWKDevice.currentDevice, .Metal)
   }
 
   func testIsCPU() {

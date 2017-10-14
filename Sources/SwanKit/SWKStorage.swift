@@ -63,7 +63,7 @@ public class SWKStorageBase<T> {
       return dev;
     }
 
-    return SWKDevice.defaultDevice
+    return SWKDevice.currentDevice
   }
 
   /// Is storage reeady for CPU?

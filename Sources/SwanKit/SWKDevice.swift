@@ -7,7 +7,7 @@
 // Copyright (c) 2017 Dimitri Kurashvili. All rights reserved
 //
 
-/// `SWKDevice` describes device available for computation.
+/// `SWKDevice` describes computation device.
 public enum SWKDevice {
 
   /// CPU device.
@@ -19,16 +19,16 @@ public enum SWKDevice {
   /// [CUDA](https://developer.nvidia.com/cuda-toolkit) enabled GPU device.
   case CUDA
 
-  private static var _defaultDevice = SWKDevice.CPU
+  private static var _currentDevice = SWKDevice.CPU
 
-  /// Currently configured default device.
-  public static var defaultDevice: SWKDevice {
+  /// Current device.
+  public static var currentDevice: SWKDevice {
     get {
-      return _defaultDevice
+      return _currentDevice
     }
 
     set {
-      _defaultDevice = newValue
+      _currentDevice = newValue
     }
   }
 
