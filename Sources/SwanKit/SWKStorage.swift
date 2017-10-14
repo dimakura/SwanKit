@@ -1,52 +1,110 @@
-import Foundation
+//
+// SwanKit
+// SWKStorage.swift
+//
+// Created by Dimitri Kurashvili on 2017-10-14
+//
+// Copyright (c) 2017 Dimitri Kurashvili. All rights reserved
+//
 
+/// Generic storage type.
+///
+/// See `SWKStorage` for details.
+public class SWKStorageBase<T> {
 
-/**
-A `SWKStorage` is a contiguous, one-dimensional array of a single data type.
-*/
-struct SWKStorage<T> {
-  // Implement CPU-based non-sparse storage
-  //
-  // TODO list:
-  //
-  // 01 .Initializer by size (integer)
-  // 02. Initializer from array (data)
-  // 03. size => size of the array, 0 should be acceptable
-  // 04. elementSize => size of the element (e.g. MemoryLayout<Int>.size)
-  // 05. toArray (?) => like tolist in PyTorch
-  // 06. isCPU => for now always TRUE
-  // 07. isGPU => for now always FALSE
-  // 08. free storage (some Swift mechanics for destroy?) https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/Deinitialization.html
-  // 09. retain => +1 element (?) see THStorage_(retain)
-  // 10. resize_ => resize to a new size (only when resizable?)
-  // 11. fill => fill all the storage with given value
-  // 12. get/set value at specified index (subscript)
-  // 13. share_memory_ => move to be shared among processes (?)
-  // More?
-  // XXX: It's not clear if Swift implementation will be performan enough
+  // https://developer.apple.com/documentation/swift/unsafemutablepointer
+  private var _ptr: UnsafeMutablePointer<T>
+
+  // https://developer.apple.com/documentation/swift/unsafemutablebufferpointer
+  private var _buffer: UnsafeMutableBufferPointer<T>
+
+  /// Creates uninitialized storage of given size.
+  public init(_ size: Int) {
+    _ptr = UnsafeMutablePointer<T>.allocate(capacity: size)
+    _buffer = UnsafeMutableBufferPointer(start: _ptr, count: size)
+  }
+
+  /// Creates storage from the given array.
+  convenience public init(_ data: [T]) {
+    self.init(data.count)
+    (_, _) = _buffer.initialize(from: data)
+  }
+
+  deinit {
+    // Swift counts referecences for us 🎉. All we need todo is to free the allocated memory.
+    _ptr.deallocate(capacity: size)
+  }
+
+  public subscript(index: Int) -> T {
+    get {
+      return _buffer[index]
+    }
+    set {
+      _buffer[index] = newValue
+    }
+  }
+
+  public var size: Int {
+    return _buffer.count
+  }
+
+  /// Number of bytes occupied by single element.
+  public var elementSize: Int {
+    return MemoryLayout<T>.stride
+  }
 
 }
 
 /// Byte storage.
-typealias SWKByteStorage  = SWKStorage<Int8>
+public typealias SWKByteStorage  = SWKStorageBase<Int8>
 
 /// Character storage.
-typealias SWKCharStorage  = SWKStorage<Character>
+public typealias SWKCharStorage  = SWKStorageBase<Character>
 
 /// Short storage.
-typealias SWKShortStorage = SWKStorage<Int16>
+public typealias SWKShortStorage = SWKStorageBase<Int16>
 
 /// Int storage.
-typealias SWKIntStorage   = SWKStorage<Int32>
+public typealias SWKIntStorage   = SWKStorageBase<Int32>
 
 /// Long storage.
-typealias SWKLongStorage  = SWKStorage<Int64>
-
+public typealias SWKLongStorage  = SWKStorageBase<Int64>
 
 // typealias SWKHalfStorage   = ?
 
 /// Float storage.
-typealias SWKFloatStorage  = SWKStorage<Float>
+public typealias SWKFloatStorage  = SWKStorageBase<Float>
 
 /// Double storage.
-typealias SWKDoubleStorage = SWKStorage<Double>
+public typealias SWKDoubleStorage = SWKStorageBase<Double>
+
+/**
+A `SWKStorage` is collection of `Float` data type.
+
+There are also predefined storages for other primitive data types:
+
+- `SWKByteStorage`, corresponding to Swift's `Int8` type;
+- `SWKCharStorage`, corresponding to Swift's `Character` type;
+- `SWKShortStorage`, corresponding to Swift's `Int16` type;
+- `SWKIntStorage`, corresponding to Swift's `Int32` type;
+- `SWKLongStorage`, corresponding to Swift's `Int64` type;
+- `SWKFloatStorage` (same as `SWKStorage`), corresponding to Swift's `Float` type;
+- `SWKDoubleStorage`, corresponding to Swift's `Double` type.
+
+You don't usually create `SWKStorage` as it's automatically allocated in tensors.
+In case you still need to create storage yourself, there are two ways how to do it:
+
+```swift
+// 1. Creates uninitialized storage of size 10
+var storage = SWKStorage(10)
+
+// 2. Creates storage of size 4 with elements initialized from the array
+var storage = SWKStorage([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+
+// Some properties of the storage.
+print(storage.size)        // 10 -- number of elements
+print(storage.elementSize) // 4 -- bytes taken by each element
+print(storage[5])          // 6.0 -- value of the 6th element
+```
+*/
+public typealias SWKStorage = SWKFloatStorage

@@ -1,4 +1,5 @@
 //
+// SwanKit
 // SWKSize.swift
 //
 // Created by Dimitri Kurashvili on 2017-10-13
@@ -7,23 +8,21 @@
 //
 
 /**
-`SWKSize` describes size of a tensor across available dimensions.
+`SWKSize` describes tensor size across available dimensions.
 
-To create `SWKSize` of size `5x3`:
+You create `SWKSize` by listing all dimension sizes to initializer:
 
 ```swift
-let size = SWKSize(5, 3)
+let size = SWKSize(5, 3) // Creates
 ````
 
-**Note**: `SWKSize` is an immutable data structure: once created you cannot change its properties.
-
-You can access dimensionality of `SWKSize` instance using `dimensions` property:
+`dimensions` property gives dimensionality of `SWKSize` instance:
 
 ```swift
 size.dimensions // 2
 ```
 
-You can access size of a dimension using subscripts:
+You can access size of a dimension using subscript operator:
 
 ```swift
 size[0] // 5
@@ -40,58 +39,46 @@ size.y // 3
 There are also `z` and `t` properties for third and forth dimensions:
 
 ```swift
-size.z // Throws out of index exception
-size.t // Throws out of index exception
+size.z // Throws Index out of range exception
+size.t // Throws Index out of range exception
 ```
 */
-struct SWKSize {
+public class SWKSize {
 
   private let _dimensions: [Int]
 
   /// Creates instance of `SWKSize`.
-  init(_ dimensions: Int...) {
+  public init(_ dimensions: Int...) {
     _dimensions = dimensions
   }
 
-  subscript(index: Int) -> Int {
-    get {
-      return _dimensions[index]
-    }
+  public subscript(index: Int) -> Int {
+    return _dimensions[index]
   }
 
   /// Dimensionality of this size.
-  var dimensions: Int {
-    get {
-      return _dimensions.count
-    }
+  public var dimensions: Int {
+    return _dimensions.count
   }
 
   /// Size accross first dimension.
-  var x: Int {
-    get {
-      return _dimensions[0]
-    }
+  public var x: Int {
+    return _dimensions[0]
   }
 
   /// Size accross second dimension.
-  var y: Int {
-    get {
-      return _dimensions[1]
-    }
+  public var y: Int {
+    return _dimensions[1]
   }
 
   /// Size accross third dimension.
-  var z: Int {
-    get {
-      return _dimensions[2]
-    }
+  public var z: Int {
+    return _dimensions[2]
   }
 
   /// Size accross forth dimension.
-  var t: Int {
-    get {
-      return _dimensions[3]
-    }
+  public var t: Int {
+    return _dimensions[3]
   }
 
 }
