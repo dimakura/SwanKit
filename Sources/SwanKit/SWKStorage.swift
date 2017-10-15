@@ -28,7 +28,7 @@ public class SWKStorageBase<T> {
   /// Creates storage from the given array.
   convenience public init(_ data: [T]) {
     self.init(data.count)
-    (_, _) = _buffer.initialize(from: data)
+    _ = _buffer.initialize(from: data)
   }
 
   deinit {
