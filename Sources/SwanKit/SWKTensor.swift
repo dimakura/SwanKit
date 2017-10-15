@@ -13,8 +13,19 @@ public class SWKTensorBase<T> {
   private var _storage: SWKStorageBase<T>;
 
   public init(_ dimensions: Int...) {
+    // TODO: assert all dimensions are > 0
     _size = SWKSize(dimensions)
     _storage = SWKStorageBase<T>(_size.capacity)
+  }
+
+  convenience public init(_ arr1: [T]) {
+    self.init(arr1.count)
+    // TODO: init storage
+  }
+
+  convenience public init(_ arr2: [[T]]) {
+    self.init(arr2.count)
+    // TODO: init storage
   }
 
   public subscript(index: Int...) -> T {
