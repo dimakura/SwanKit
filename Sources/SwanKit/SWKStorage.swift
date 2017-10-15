@@ -36,13 +36,17 @@ public class SWKStorageBase<T> {
     _ptr.deallocate(capacity: size)
   }
 
+  private func indexInRange(_ index: Int) -> Bool {
+    return index >= 0 && index < size
+  }
+
   public subscript(index: Int) -> T {
     get {
-      assert(index >= 0 && index < size, "Index out of bounds: \(index)", file: #file, line: #line)
+      assert(indexInRange(index), "Index out of bounds: \(index)", file: #file, line: #line)
       return _buffer[index]
     }
     set {
-      assert(index >= 0 && index < size, "Index out of bounds: \(index)", file: #file, line: #line)
+      assert(indexInRange(index), "Index out of bounds: \(index)", file: #file, line: #line)
       _buffer[index] = newValue
     }
   }
