@@ -41,10 +41,16 @@ class SWKSizeTest: XCTestCase {
     XCTAssertEqual(size.dimensions, 4)
   }
 
+  func testCapacity() {
+    XCTAssertEqual(size.capacity, 24)
+    XCTAssertEqual(SWKSize(1_000, 400, 5).capacity, 2_000_000)
+  }
+
   static var allTests = [
     ("testSubscriptAccess", testSubscriptAccess),
     ("testPropertyAccess", testPropertyAccess),
     ("testDimensionality", testDimensionality),
+    ("testCapacity", testCapacity),
   ]
 
 }

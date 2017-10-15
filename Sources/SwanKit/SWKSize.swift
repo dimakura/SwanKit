@@ -13,7 +13,8 @@
 You create `SWKSize` by listing all dimension sizes to initializer:
 
 ```swift
-let size = SWKSize(5, 3) // Creates
+let size = SWKSize(5, 3)
+size.capacity // 15
 ````
 
 `dimensions` property gives dimensionality of `SWKSize` instance:
@@ -46,10 +47,12 @@ size.t // Throws Index out of range exception
 public class SWKSize {
 
   private let _dimensions: [Int]
+  public let capacity: Int
 
   /// Creates instance of `SWKSize`.
   public init(_ dimensions: Int...) {
     _dimensions = dimensions
+    capacity = dimensions.reduce(1, { x, y in x * y })
   }
 
   public subscript(index: Int) -> Int {
