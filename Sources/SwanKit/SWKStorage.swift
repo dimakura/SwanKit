@@ -63,11 +63,7 @@ public class SWKStorageBase<T> {
 
   /// Current device for this store.
   public var device: SWKDevice {
-    if let dev = _device {
-      return dev;
-    }
-
-    return SWKDevice.currentDevice
+    return _device ?? SWKDevice.currentDevice
   }
 
   /// Is storage reeady for CPU?
