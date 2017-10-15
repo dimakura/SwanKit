@@ -50,9 +50,14 @@ public class SWKSize {
   public let capacity: Int
 
   /// Creates instance of `SWKSize`.
-  public init(_ dimensions: Int...) {
+  public init(_ dimensions: [Int]) {
     _dimensions = dimensions
     capacity = dimensions.reduce(1, *)
+  }
+
+  /// Creates instance of `SWKSize`.
+  convenience public init(_ dimensions: Int...) {
+    self.init(dimensions)
   }
 
   public subscript(index: Int) -> Int {
