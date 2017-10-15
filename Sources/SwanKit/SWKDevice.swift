@@ -19,19 +19,6 @@ public enum SWKDevice {
   /// [CUDA](https://developer.nvidia.com/cuda-toolkit) enabled GPU device.
   case CUDA
 
-  private static var _currentDevice = SWKDevice.CPU
-
-  /// Current device.
-  public static var currentDevice: SWKDevice {
-    get {
-      return _currentDevice
-    }
-
-    set {
-      _currentDevice = newValue
-    }
-  }
-
   /// Is this a CPU device?
   public var isCPU: Bool {
     return self == SWKDevice.CPU

@@ -63,7 +63,7 @@ public class SWKStorageBase<T> {
 
   /// Current device for this store.
   public var device: SWKDevice {
-    return _device ?? SWKDevice.currentDevice
+    return _device ?? SWKConfig.currentDevice
   }
 
   /// Is storage reeady for CPU?
