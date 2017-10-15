@@ -10,49 +10,22 @@
 /**
 `SWKSize` describes tensor size across available dimensions.
 
-You create `SWKSize` by listing all dimension sizes to initializer:
-
 ```swift
 let size = SWKSize(5, 3)
 size.capacity // 15
 ````
-
-`dimensions` property gives dimensionality of `SWKSize` instance:
-
-```swift
-size.dimensions // 2
-```
-
-You can access size of a dimension using subscript operator:
-
-```swift
-size[0] // 5
-size[1] // 3
-```
-
-Or using properties `x` and `y` for two initial dimensions:
-
-```swift
-size.x // 5
-size.y // 3
-```
-
-There are also `z` and `t` properties for third and forth dimensions:
-
-```swift
-size.z // Throws Index out of range exception
-size.t // Throws Index out of range exception
-```
 */
-public class SWKSize {
+public class SWKSize : CustomStringConvertible {
 
   private let _dimensions: [Int]
-  public let capacity: Int
+
+  /// How many elements can tensor of this size contain?
+  public  let capacity:    Int
 
   /// Creates instance of `SWKSize`.
   public init(_ dimensions: [Int]) {
-    _dimensions = dimensions
-    capacity = dimensions.reduce(1, *)
+    _dimensions = SWK_cutDimensions(dimensions)
+    capacity = _dimensions.isEmpty ? 0 : _dimensions.reduce(1, *)
   }
 
   /// Creates instance of `SWKSize`.
@@ -69,24 +42,13 @@ public class SWKSize {
     return _dimensions.count
   }
 
-  /// Size accross first dimension.
-  public var x: Int {
-    return _dimensions[0]
+  /// Empty size?
+  public var isEmpty: Bool {
+    return _dimensions.isEmpty
   }
 
-  /// Size accross second dimension.
-  public var y: Int {
-    return _dimensions[1]
-  }
-
-  /// Size accross third dimension.
-  public var z: Int {
-    return _dimensions[2]
-  }
-
-  /// Size accross forth dimension.
-  public var t: Int {
-    return _dimensions[3]
+  public var description: String {
+    return _dimensions.map({"\($0)"}).joined(separator: "x")
   }
 
 }

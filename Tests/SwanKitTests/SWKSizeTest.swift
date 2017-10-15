@@ -24,33 +24,37 @@ class SWKSizeTest: XCTestCase {
     XCTAssertEqual(size[3], 4)
   }
 
-  func testPropertyAccess() {
-    XCTAssertEqual(size.x, 1)
-    XCTAssertEqual(size.y, 2)
-    XCTAssertEqual(size.z, 3)
-    XCTAssertEqual(size.t, 4)
-  }
-
   func testDimensionality() {
-    let s1 = SWKSize(1)
-    let s2 = SWKSize(1, 2)
-    let s3 = SWKSize(1, 2, 3)
-    XCTAssertEqual(s1.dimensions, 1)
-    XCTAssertEqual(s2.dimensions, 2)
-    XCTAssertEqual(s3.dimensions, 3)
+    XCTAssertEqual(SWKSize(1).dimensions, 1)
+    XCTAssertEqual(SWKSize(1, 2).dimensions, 2)
+    XCTAssertEqual(SWKSize(1, 2, 3).dimensions, 3)
+    XCTAssertEqual(SWKSize(1, 2, 3, 0, 5).dimensions, 3)
     XCTAssertEqual(size.dimensions, 4)
   }
 
   func testCapacity() {
     XCTAssertEqual(size.capacity, 24)
     XCTAssertEqual(SWKSize(1_000, 400, 5).capacity, 2_000_000)
+    XCTAssertEqual(SWKSize(1, 2, 3, 0, 10).capacity, 6)
+  }
+
+  func testEmptiness() {
+    XCTAssertFalse(size.isEmpty)
+    XCTAssertTrue(SWKSize().isEmpty)
+    XCTAssertTrue(SWKSize().isEmpty)
+  }
+
+  func testDescription() {
+    XCTAssertEqual(size.description, "1x2x3x4")
+    XCTAssertEqual(SWKSize().description, "")
   }
 
   static var allTests = [
     ("testSubscriptAccess", testSubscriptAccess),
-    ("testPropertyAccess", testPropertyAccess),
     ("testDimensionality", testDimensionality),
     ("testCapacity", testCapacity),
+    ("testEmptiness", testEmptiness),
+    ("testDescription", testDescription),
   ]
 
 }

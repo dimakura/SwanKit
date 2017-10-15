@@ -1,6 +1,6 @@
 //
 // SwanKit
-// SWKDiviceTest.swift
+// SWKDeviceTest.swift
 //
 // Created by Dimitri Kurashvili on 2017-10-14
 //
