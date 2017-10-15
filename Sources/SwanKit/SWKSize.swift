@@ -52,7 +52,7 @@ public class SWKSize {
   /// Creates instance of `SWKSize`.
   public init(_ dimensions: Int...) {
     _dimensions = dimensions
-    capacity = dimensions.reduce(1, { x, y in x * y })
+    capacity = dimensions.reduce(1, *)
   }
 
   public subscript(index: Int) -> Int {
