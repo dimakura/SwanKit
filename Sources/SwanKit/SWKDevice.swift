@@ -9,7 +9,6 @@
 
 /// `SWKDevice` describes computation device.
 public enum SWKDevice {
-
   /// CPU device.
   case CPU
 
@@ -28,5 +27,4 @@ public enum SWKDevice {
   public var isGPU: Bool {
     return !isCPU
   }
-
 }

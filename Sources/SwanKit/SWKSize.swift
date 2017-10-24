@@ -7,20 +7,18 @@
 // Copyright (c) 2017 Dimitri Kurashvili. All rights reserved
 //
 
-/**
-`SWKSize` describes tensor size across available dimensions.
 
-```swift
-let size = SWKSize(5, 3)
-size.capacity // 15
-````
-*/
+/// `SWKSize` describes tensor dimensionality.
+///
+/// ```swift
+/// let size = SWKSize(5, 3)
+/// size.capacity // 15
+/// ````
 public class SWKSize : CustomStringConvertible {
-
   private let _dimensions: [Int]
 
   /// How many elements can tensor of this size contain?
-  public  let capacity:    Int
+  public  let capacity: Int
 
   /// Creates instance of `SWKSize`.
   public init(_ dimensions: [Int]) {
@@ -50,5 +48,4 @@ public class SWKSize : CustomStringConvertible {
   public var description: String {
     return _dimensions.map({"\($0)"}).joined(separator: "x")
   }
-
 }

@@ -7,20 +7,24 @@
 // Copyright (c) 2017 Dimitri Kurashvili. All rights reserved
 //
 
-import XCTest
+import SSpec
 @testable import SwanKit
 
-class DimensionalityTest: XCTestCase {
+func test_Dimensionality() {
+  describe("Dimensionality") {
+    func testDimensionalityReduction(from: [Int], to: [Int]) {
+      it("reduces \(from) to \(to)") {
+        let cutted = SWK_cutDimensions(from)
+        expect(cutted.count).to.eq(to.count)
+        for (idx, value) in cutted.enumerated() {
+          expect(to[idx]).to.eq(cutted[idx])
+        }
+      }
+    }
 
-  func test_cutDimensions() {
-    XCTAssertEqual(SWK_cutDimensions([0, 2, 3]), [])
-    XCTAssertEqual(SWK_cutDimensions([1, 0, 3]), [1])
-    XCTAssertEqual(SWK_cutDimensions([1, 2, 0]), [1, 2])
-    XCTAssertEqual(SWK_cutDimensions([1, 2, 3]), [1, 2, 3])
+    testDimensionalityReduction(from: [0, 2, 3], to: [])
+    testDimensionalityReduction(from: [1, 0, 3], to: [1])
+    testDimensionalityReduction(from: [1, 2, 0], to: [1, 2])
+    testDimensionalityReduction(from: [1, 2, 3], to: [1, 2, 3])
   }
-
-  static var allTests = [
-    ("test_cutDimensions", test_cutDimensions),
-  ]
-
 }

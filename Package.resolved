@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Rainbow",
+        "repositoryURL": "https://github.com/onevcat/Rainbow",
+        "state": {
+          "branch": null,
+          "revision": "dfe579abc72347618e0ffde4faa36fa085c5f3bc",
+          "version": "3.0.0"
+        }
+      },
+      {
+        "package": "SSpec",
+        "repositoryURL": "/Users/dimitri/Projects/swift/SSpec",
+        "state": {
+          "branch": null,
+          "revision": "08cb8b82577040ee2f999282d3ab5b41064df8e0",
+          "version": "0.1.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

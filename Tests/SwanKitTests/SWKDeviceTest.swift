@@ -7,31 +7,31 @@
 // Copyright (c) 2017 Dimitri Kurashvili. All rights reserved
 //
 
-import XCTest
-@testable import SwanKit
+import SSpec
+import SwanKit
 
-class SWKDeviceTest: XCTestCase {
+func test_SWKDevise() {
+  describe("SWKDevice") {
+    context("default device") {
+      it("is CPU") {
+        expect(SWKConfig.currentDevice).to.eq(SWKDevice.CPU)
+      }
+    }
 
-  func testDefaultDevice() {
-    XCTAssertEqual(SWKConfig.currentDevice, SWKDevice.CPU)
+    func testIsCPU(_ device: SWKDevice, isCPU: Bool, isGPU: Bool) {
+      context("when \(device)") {
+        it("is \(isCPU ? "" : "not ")CPU") {
+          expect(device.isCPU).to.eq(isCPU)
+        }
+
+        it("is \(isGPU ? "" : "not ")GPU") {
+          expect(device.isGPU).to.eq(isGPU)
+        }
+      }
+    }
+
+    testIsCPU(SWKDevice.CPU, isCPU: true, isGPU: false)
+    testIsCPU(SWKDevice.Metal, isCPU: false, isGPU: true)
+    testIsCPU(SWKDevice.CUDA, isCPU: false, isGPU: true)
   }
-
-  func testIsCPU() {
-    XCTAssertTrue(SWKDevice.CPU.isCPU)
-    XCTAssertFalse(SWKDevice.Metal.isCPU)
-    XCTAssertFalse(SWKDevice.CUDA.isCPU)
-  }
-
-  func testIsGPU() {
-    XCTAssertFalse(SWKDevice.CPU.isGPU)
-    XCTAssertTrue(SWKDevice.Metal.isGPU)
-    XCTAssertTrue(SWKDevice.CUDA.isGPU)
-  }
-
-  static var allTests = [
-    ("testDefaultDevice", testDefaultDevice),
-    ("testIsCPU", testIsCPU),
-    ("testIsGPU", testIsGPU),
-  ]
-
 }
