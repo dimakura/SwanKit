@@ -12,10 +12,10 @@
       },
       {
         "package": "SSpec",
-        "repositoryURL": "/Users/dimitri/Projects/swift/SSpec",
+        "repositoryURL": "https://github.com/dimakura/SSpec",
         "state": {
           "branch": null,
-          "revision": "08cb8b82577040ee2f999282d3ab5b41064df8e0",
+          "revision": "2bfac7cbdfe97982b00b26d7139c323fdcecc30d",
           "version": "0.1.0"
         }
       }
