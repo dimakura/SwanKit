@@ -30,8 +30,8 @@ func test_SWKDevise() {
       }
     }
 
-    testIsCPU(SWKDevice.CPU, isCPU: true, isGPU: false)
+    testIsCPU(SWKDevice.CPU,   isCPU: true,  isGPU: false)
     testIsCPU(SWKDevice.Metal, isCPU: false, isGPU: true)
-    testIsCPU(SWKDevice.CUDA, isCPU: false, isGPU: true)
+    testIsCPU(SWKDevice.CUDA,  isCPU: false, isGPU: true)
   }
 }

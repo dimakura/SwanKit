@@ -39,10 +39,10 @@ func test_SWKSize() {
         }
       }
 
-      testSizeProperties([5, 3], dimensions: 2, capacity: 15, empty: false)
+      testSizeProperties([5, 3],     dimensions: 2, capacity: 15,  empty: false)
       testSizeProperties([5, 3, 10], dimensions: 3, capacity: 150, empty: false)
-      testSizeProperties([5, 0], dimensions: 1, capacity: 5, empty: false)
-      testSizeProperties([0, 5], dimensions: 0, capacity: 0, empty: true)
+      testSizeProperties([5, 0],     dimensions: 1, capacity: 5,   empty: false)
+      testSizeProperties([0, 5],     dimensions: 0, capacity: 0,   empty: true)
     }
 
     context("description") {

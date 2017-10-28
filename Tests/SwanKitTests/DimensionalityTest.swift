@@ -15,10 +15,7 @@ func test_Dimensionality() {
     func testDimensionalityReduction(from: [Int], to: [Int]) {
       it("reduces \(from) to \(to)") {
         let cutted = SWK_cutDimensions(from)
-        expect(cutted.count).to.eq(to.count)
-        for (idx, value) in cutted.enumerated() {
-          expect(to[idx]).to.eq(cutted[idx])
-        }
+        expect(cutted).to.eq(to)
       }
     }
 
