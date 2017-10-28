@@ -1,6 +1,6 @@
 //
 // SwanKit
-// SWKStorageTest.swift
+// SWKStorageSpec.swift
 //
 // Created by Dimitri Kurashvili on 2017-10-14
 //
@@ -10,7 +10,7 @@
 import SSpec
 import SwanKit
 
-private func test_SWKStorage_elementSize() {
+private func spec_SWKStorage_elementSize() {
   describe("elementSize") {
     it("is 1 for byte storage") {
       expect(SWKByteStorage(100).elementSize).to.eq(1)
@@ -38,10 +38,10 @@ private func test_SWKStorage_elementSize() {
   }
 }
 
-private func test_SWKStorage_size() {
+private func spec_SWKStorage_size() {
   describe("size") {
     context("when initialized with size = 100") {
-      let storage = SWKStorage(100)
+      let storage = SWKIntStorage(100)
 
       it("is 100") {
         expect(storage.size).to.eq(100)
@@ -62,15 +62,15 @@ private func test_SWKStorage_size() {
   }
 }
 
-private func test_SWKStorage_device() {
+private func spec_SWKStorage_device() {
   describe("device") {
     it("is default device") {
-      expect(SWKStorage(10).device).to.eq(SWKConfig.currentDevice)
+      expect(SWKIntStorage(10).device).to.eq(SWKConfig.currentDevice)
     }
 
     func testSettingDevice(device: SWKDevice) {
       context("when device is set to \(device)") {
-        let storage = SWKStorage(10)
+        let storage = SWKIntStorage(10)
         storage.device = device
 
         it("is \(device)") {
@@ -93,7 +93,7 @@ private func test_SWKStorage_device() {
   }
 }
 
-private func test_SWKStorage_subscript() {
+private func spec_SWKStorage_subscript() {
   describe("storage [1, 2, 3, 4, 5]") {
     // TODO: before needed here (SSpec issue #3)
     let storage = SWKIntStorage([1, 2, 3, 4, 5])
@@ -124,7 +124,7 @@ private func test_SWKStorage_subscript() {
   }
 }
 
-private func test_SWKStorage_conversions() {
+private func spec_SWKStorage_conversions() {
   describe("cpu") {
     it("can convert storage to CPU")
   }
@@ -134,12 +134,37 @@ private func test_SWKStorage_conversions() {
   }
 }
 
-func test_SWKStorage() {
+private func spec_SWKStorage_fill_operations() {
+  context("when filling with zeros") {
+    let storage = SWKFloatStorage(5)
+    storage.zeros()
+
+    it("contains all zeros") {
+      for i in 0..<5 {
+        expect(storage[i]).to.eq(0)
+      }
+    }
+  }
+
+  describe("when filling with ones") {
+    let storage = SWKFloatStorage(5)
+    storage.ones()
+
+    it("contains all ones") {
+      for i in 0..<5 {
+        expect(storage[i]).to.eq(1)
+      }
+    }
+  }
+}
+
+func spec_SWKStorage() {
   describe("SWKStorage") {
-    test_SWKStorage_elementSize()
-    test_SWKStorage_size()
-    test_SWKStorage_device()
-    test_SWKStorage_subscript()
-    test_SWKStorage_conversions()
+    spec_SWKStorage_elementSize()
+    spec_SWKStorage_size()
+    spec_SWKStorage_device()
+    spec_SWKStorage_subscript()
+    spec_SWKStorage_conversions()
+    spec_SWKStorage_fill_operations()
   }
 }

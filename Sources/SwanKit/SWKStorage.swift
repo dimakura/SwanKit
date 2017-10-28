@@ -7,10 +7,22 @@
 // Copyright (c) 2017 Dimitri Kurashvili. All rights reserved
 //
 
-/// Generic storage type.
+/// You don't usually create `SWKStorage` as it's automatically allocated in tensors.
+/// In case you still need to create storage yourself, there are two ways how to do it:
 ///
-/// See `SWKStorage` for details.
-public class SWKStorageBase<T> {
+/// ```swift
+/// // 1. Creates uninitialized storage of size 10
+/// var storage = SWKStorage(10)
+///
+/// // 2. Creates storage of size 4 with elements initialized from the array
+/// var storage = SWKStorage([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+///
+/// // Some properties of the storage.
+/// print(storage.size)        // 10 -- number of elements
+/// print(storage.elementSize) // 4 -- bytes taken by each element
+/// print(storage[5])          // 6.0 -- value of the 6th element
+/// ```
+public class SWKStorage<T> {
   // https://developer.apple.com/documentation/swift/unsafemutablepointer
   // https://developer.apple.com/documentation/swift/unsafemutablebufferpointer
   private var _ptr: UnsafeMutablePointer<T>
@@ -41,11 +53,11 @@ public class SWKStorageBase<T> {
 
   public subscript(index: Int) -> T {
     get {
-      assert(indexInRange(index), "Index out of bounds: \(index)", file: #file, line: #line)
+      assert(indexInRange(index), "Index out of bounds: \(index)")
       return _buffer[index]
     }
     set {
-      assert(indexInRange(index), "Index out of bounds: \(index)", file: #file, line: #line)
+      assert(indexInRange(index), "Index out of bounds: \(index)")
       _buffer[index] = newValue
     }
   }
@@ -81,60 +93,49 @@ public class SWKStorageBase<T> {
   }
 
   /// Converts this storage for use with CPU.
-  public func cpu() -> SWKStorageBase<T> {
+  public func cpu() -> SWKStorage<T> {
     fatalError("Not implemented", file: #file, line: #line)
   }
 
   /// Converts this storage for use with GPU.
-  public func gpu(device: SWKDevice = .Metal) -> SWKStorageBase<T> {
+  public func gpu(device: SWKDevice = .Metal) -> SWKStorage<T> {
     fatalError("Not implemented", file: #file, line: #line)
+  }
+
+  /// Fills storage with same value.
+  public func fill(_ value: T) {
+    for i in 0..<size {
+      _buffer[i] = value
+    }
+  }
+}
+
+extension SWKStorage where T: SignedNumeric {
+  /// Fills storage with zeros.
+  public func zeros() {
+    fill(0)
+  }
+
+  /// Fills storage with ones.
+  public func ones() {
+    fill(1)
   }
 }
 
 /// Byte storage.
-public typealias SWKByteStorage  = SWKStorageBase<Int8>
+public typealias SWKByteStorage  = SWKStorage<Int8>
 
 /// Short storage.
-public typealias SWKShortStorage = SWKStorageBase<Int16>
+public typealias SWKShortStorage = SWKStorage<Int16>
 
 /// Int storage.
-public typealias SWKIntStorage   = SWKStorageBase<Int32>
+public typealias SWKIntStorage   = SWKStorage<Int32>
 
 /// Long storage.
-public typealias SWKLongStorage  = SWKStorageBase<Int64>
-
-// typealias SWKHalfStorage   = ?
+public typealias SWKLongStorage  = SWKStorage<Int64>
 
 /// Float storage.
-public typealias SWKFloatStorage  = SWKStorageBase<Float>
+public typealias SWKFloatStorage  = SWKStorage<Float>
 
 /// Double storage.
-public typealias SWKDoubleStorage = SWKStorageBase<Double>
-
-/// A `SWKStorage` is collection of `Float` data type.
-///
-/// There are also predefined storages for other primitive data types:
-///
-/// - `SWKByteStorage`, corresponding to Swift's `Int8` type;
-/// - `SWKShortStorage`, corresponding to Swift's `Int16` type;
-/// - `SWKIntStorage`, corresponding to Swift's `Int32` type;
-/// - `SWKLongStorage`, corresponding to Swift's `Int64` type;
-/// - `SWKFloatStorage` (same as `SWKStorage`), corresponding to Swift's `Float` type;
-/// - `SWKDoubleStorage`, corresponding to Swift's `Double` type.
-///
-/// You don't usually create `SWKStorage` as it's automatically allocated in tensors.
-/// In case you still need to create storage yourself, there are two ways how to do it:
-///
-/// ```swift
-/// // 1. Creates uninitialized storage of size 10
-/// var storage = SWKStorage(10)
-///
-/// // 2. Creates storage of size 4 with elements initialized from the array
-/// var storage = SWKStorage([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
-///
-/// // Some properties of the storage.
-/// print(storage.size)        // 10 -- number of elements
-/// print(storage.elementSize) // 4 -- bytes taken by each element
-/// print(storage[5])          // 6.0 -- value of the 6th element
-/// ```
-public typealias SWKStorage = SWKFloatStorage
+public typealias SWKDoubleStorage = SWKStorage<Double>
