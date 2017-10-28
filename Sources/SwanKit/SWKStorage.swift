@@ -11,7 +11,6 @@
 ///
 /// See `SWKStorage` for details.
 public class SWKStorageBase<T> {
-
   // https://developer.apple.com/documentation/swift/unsafemutablepointer
   // https://developer.apple.com/documentation/swift/unsafemutablebufferpointer
   private var _ptr: UnsafeMutablePointer<T>
@@ -63,7 +62,12 @@ public class SWKStorageBase<T> {
 
   /// Current device for this store.
   public var device: SWKDevice {
-    return _device ?? SWKConfig.currentDevice
+    get {
+      return _device ?? SWKConfig.currentDevice
+    }
+    set {
+      _device = newValue
+    }
   }
 
   /// Is storage reeady for CPU?
@@ -85,7 +89,6 @@ public class SWKStorageBase<T> {
   public func gpu(device: SWKDevice = .Metal) -> SWKStorageBase<T> {
     fatalError("Not implemented", file: #file, line: #line)
   }
-
 }
 
 /// Byte storage.
@@ -108,32 +111,30 @@ public typealias SWKFloatStorage  = SWKStorageBase<Float>
 /// Double storage.
 public typealias SWKDoubleStorage = SWKStorageBase<Double>
 
-/**
-A `SWKStorage` is collection of `Float` data type.
-
-There are also predefined storages for other primitive data types:
-
-- `SWKByteStorage`, corresponding to Swift's `Int8` type;
-- `SWKShortStorage`, corresponding to Swift's `Int16` type;
-- `SWKIntStorage`, corresponding to Swift's `Int32` type;
-- `SWKLongStorage`, corresponding to Swift's `Int64` type;
-- `SWKFloatStorage` (same as `SWKStorage`), corresponding to Swift's `Float` type;
-- `SWKDoubleStorage`, corresponding to Swift's `Double` type.
-
-You don't usually create `SWKStorage` as it's automatically allocated in tensors.
-In case you still need to create storage yourself, there are two ways how to do it:
-
-```swift
-// 1. Creates uninitialized storage of size 10
-var storage = SWKStorage(10)
-
-// 2. Creates storage of size 4 with elements initialized from the array
-var storage = SWKStorage([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
-
-// Some properties of the storage.
-print(storage.size)        // 10 -- number of elements
-print(storage.elementSize) // 4 -- bytes taken by each element
-print(storage[5])          // 6.0 -- value of the 6th element
-```
-*/
+/// A `SWKStorage` is collection of `Float` data type.
+///
+/// There are also predefined storages for other primitive data types:
+///
+/// - `SWKByteStorage`, corresponding to Swift's `Int8` type;
+/// - `SWKShortStorage`, corresponding to Swift's `Int16` type;
+/// - `SWKIntStorage`, corresponding to Swift's `Int32` type;
+/// - `SWKLongStorage`, corresponding to Swift's `Int64` type;
+/// - `SWKFloatStorage` (same as `SWKStorage`), corresponding to Swift's `Float` type;
+/// - `SWKDoubleStorage`, corresponding to Swift's `Double` type.
+///
+/// You don't usually create `SWKStorage` as it's automatically allocated in tensors.
+/// In case you still need to create storage yourself, there are two ways how to do it:
+///
+/// ```swift
+/// // 1. Creates uninitialized storage of size 10
+/// var storage = SWKStorage(10)
+///
+/// // 2. Creates storage of size 4 with elements initialized from the array
+/// var storage = SWKStorage([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+///
+/// // Some properties of the storage.
+/// print(storage.size)        // 10 -- number of elements
+/// print(storage.elementSize) // 4 -- bytes taken by each element
+/// print(storage[5])          // 6.0 -- value of the 6th element
+/// ```
 public typealias SWKStorage = SWKFloatStorage

@@ -16,6 +16,7 @@ class SwanKitTests: XCTestCase {
       test_SWKSize()
       test_SWKDevise()
       test_Dimensionality()
+      test_SWKStorage()
     }
 
     XCTAssert(session.hasErrors == false)
