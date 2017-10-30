@@ -1,0 +1,34 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Progress",
+        "repositoryURL": "https://github.com/jkandzi/Progress.swift",
+        "state": {
+          "branch": null,
+          "revision": "62c42a85d807f4017a506da5e3190122e2167adb",
+          "version": "0.3.0"
+        }
+      },
+      {
+        "package": "Rainbow",
+        "repositoryURL": "https://github.com/onevcat/Rainbow",
+        "state": {
+          "branch": null,
+          "revision": "dfe579abc72347618e0ffde4faa36fa085c5f3bc",
+          "version": "3.0.0"
+        }
+      },
+      {
+        "package": "SSpec",
+        "repositoryURL": "https://github.com/dimakura/SSpec",
+        "state": {
+          "branch": null,
+          "revision": "b19b3e44dfc3b289c022e75217ec08227d5cf1c3",
+          "version": "0.1.3"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
