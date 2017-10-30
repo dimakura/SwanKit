@@ -12,14 +12,15 @@ import SSpec
 
 class SwanKitTests: XCTestCase {
   func testAllSpecs() {
-    let session = SSS.run {
-      test_SWKSize()
-      test_SWKDevise()
-      test_Dimensionality()
-      test_SWKStorage()
+    SSpec.run {
+      spec_SWKSize()
+      spec_SWKDevise()
+      spec_Dimensionality()
+      spec_SWKStorage()
+      spec_SWKTensor()
     }
 
-    XCTAssert(session.hasErrors == false)
+    XCTAssert(SSpec.hasErrors == false)
   }
 
   static var allTests = [

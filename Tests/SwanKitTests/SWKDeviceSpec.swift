@@ -1,6 +1,6 @@
 //
 // SwanKit
-// SWKDeviceTest.swift
+// SWKDeviceSpec.swift
 //
 // Created by Dimitri Kurashvili on 2017-10-14
 //
@@ -10,7 +10,7 @@
 import SSpec
 import SwanKit
 
-func test_SWKDevise() {
+func spec_SWKDevise() {
   describe("SWKDevice") {
     context("default device") {
       it("is CPU") {
