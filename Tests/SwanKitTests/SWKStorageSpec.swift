@@ -98,7 +98,7 @@ private func spec_SWKStorage_subscript() {
 
     it("has initial values") {
       for i in 0..<storage.size {
-        let expectedValue = Int32(truncatingIfNeeded: i + 1)
+        let expectedValue = SWKInt(truncatingIfNeeded: i + 1)
         expect(storage[i]).to.eq(expectedValue)
       }
     }

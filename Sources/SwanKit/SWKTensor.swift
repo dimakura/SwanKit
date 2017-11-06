@@ -101,13 +101,6 @@ public class SWKTensor<T: Comparable>: CustomStringConvertible {
   }
 }
 
-public typealias SWKByte   = Int8
-public typealias SWKShort  = Int16
-public typealias SWKInt    = Int32
-public typealias SWKLong   = Int64
-public typealias SWKFloat  = Float
-public typealias SWKDouble = Double
-
 /// Byte tensor.
 public typealias SWKByteTensor   = SWKTensor<SWKByte>
 

@@ -114,19 +114,19 @@ extension SWKStorage where T: SignedNumeric {
 }
 
 /// Byte storage.
-public typealias SWKByteStorage  = SWKStorage<Int8>
+public typealias SWKByteStorage  = SWKStorage<SWKByte>
 
 /// Short storage.
-public typealias SWKShortStorage = SWKStorage<Int16>
+public typealias SWKShortStorage = SWKStorage<SWKShort>
 
 /// Int storage.
-public typealias SWKIntStorage   = SWKStorage<Int32>
+public typealias SWKIntStorage   = SWKStorage<SWKInt>
 
 /// Long storage.
-public typealias SWKLongStorage  = SWKStorage<Int64>
+public typealias SWKLongStorage  = SWKStorage<SWKLong>
 
 /// Float storage.
-public typealias SWKFloatStorage  = SWKStorage<Float>
+public typealias SWKFloatStorage  = SWKStorage<SWKFloat>
 
 /// Double storage.
-public typealias SWKDoubleStorage = SWKStorage<Double>
+public typealias SWKDoubleStorage = SWKStorage<SWKDouble>
