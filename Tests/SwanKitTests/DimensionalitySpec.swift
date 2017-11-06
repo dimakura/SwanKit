@@ -1,21 +1,6 @@
 import SSpec
 @testable import SwanKit
 
-private func spec_cutDimensions() {
-  func testDimensionalityReduction(from: [Int], to: [Int]) {
-    it("reduces \(from) to \(to)") {
-      expect(cutDimensions(from)).to.eq(to)
-    }
-  }
-
-  describe("cutDimensions") {
-    testDimensionalityReduction(from: [0, 2, 3], to: [])
-    testDimensionalityReduction(from: [1, 0, 3], to: [1])
-    testDimensionalityReduction(from: [1, 2, 0], to: [1, 2])
-    testDimensionalityReduction(from: [1, 2, 3], to: [1, 2, 3])
-  }
-}
-
 private func spec_calculateStride() {
   func testStrideCalculation(dimensions: [Int], stride: [Int]) {
     it("stride for \(dimensions) is \(stride)") {
@@ -72,7 +57,7 @@ private func spec_calculateSize() {
 
 func spec_Dimensionality() {
   describe("Dimensionality") {
-    spec_cutDimensions()
+    // spec_cutDimensions()
     spec_calculateStride()
     spec_calculateSize()
   }

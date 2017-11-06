@@ -5,20 +5,17 @@
 /// size.capacity // 15
 /// ````
 public class SWKSize: CustomStringConvertible {
-  /// Number of dimensions.
-  public let numberOfDimensions: Int
+  private var _dimensions: [Int]
 
-  /// Dimensions for this size.
-  public let dimensions: [Int]
-
-  /// How many elements can tensor of this size contain?
+  /// Number of elements this size can contain.
   public let capacity: Int
 
   /// Creates instance of `SWKSize`.
+  /// This constructor cuts dimensions on the first non-zero item.
   public init(_ dimensions: [Int]) {
-    self.dimensions = cutDimensions(dimensions)
-    capacity = self.dimensions.isEmpty ? 0 : self.dimensions.reduce(1, *)
-    numberOfDimensions = self.dimensions.count
+    let cutOnIndex = dimensions.index { x in x < 1 } ?? dimensions.count
+    _dimensions = Array(dimensions[0..<cutOnIndex])
+    capacity = _dimensions.isEmpty ? 0 : _dimensions.reduce(1, *)
   }
 
   /// Creates instance of `SWKSize`.
@@ -28,11 +25,30 @@ public class SWKSize: CustomStringConvertible {
 
   /// Empty size?
   public var isEmpty: Bool {
-    return self.dimensions.isEmpty
+    return _dimensions.isEmpty
+  }
+
+  /// Dimensions for this size.
+  public var dimensions: [Int] {
+    return _dimensions
+  }
+
+  /// Number of dimensions.
+  public var numberOfDimensions: Int {
+    return _dimensions.count
+  }
+
+  /// Transpose this size.
+  public func transpose(dim1: Int = 0, dim2: Int = 1) {
+    guard dim1 < numberOfDimensions && dim2 < numberOfDimensions && dim1 != dim2 else { return }
+
+    let z = _dimensions[dim1]
+    _dimensions[dim1] = _dimensions[dim2]
+    _dimensions[dim2] = z
   }
 
   /// Represent this size as a String.
   public var description: String {
-    return dimensions.map({"\($0)"}).joined(separator: "x")
+    return dimensions.map {"\($0)"}.joined(separator: "x")
   }
 }

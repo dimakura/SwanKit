@@ -1,15 +1,4 @@
-/// Cut array on the first zero member.
-///
-/// ```swift
-/// cutDimensions([0, 2, 3]) // returns []
-/// cutDimensions([1, 0, 3]) // returns [1]
-/// cutDimensions([1, 2, 0]) // returns [1, 2]
-/// cutDimensions([1, 2, 3]) // returns [1, 2, 3]
-/// ```
-func cutDimensions(_ dimensions: [Int]) -> [Int] {
-  let cutOnIndex = dimensions.index { x in x < 1 } ?? dimensions.count
-  return [Int](dimensions[0..<cutOnIndex])
-}
+// TODO: move this calculations into respective classes
 
 /// Calculates stride for given dimensions.
 func calculateStride(_ dimensions: [Int]) -> [Int] {
