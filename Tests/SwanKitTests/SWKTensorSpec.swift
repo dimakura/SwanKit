@@ -11,9 +11,13 @@ import SSpec
 import SwanKit
 
 private func spec_creation() {
-  let tensor = SWKIntTensor(5, 3)
+  describe("Create tensor 5x3") {
+    var tensor: SWKIntTensor!
 
-  describe("Create \(tensor.description)") {
+    before {
+      tensor = SWKIntTensor(5, 3)
+    }
+
     it("has size 5x3") {
       expect(tensor.size.dimensions).to.eq([5, 3])
     }
@@ -30,13 +34,17 @@ private func spec_creation() {
 
 private func spec_subscript() {
   describe("Subscript") {
-    // 1 3
-    // 2 4
-    let tensor = SWKIntTensor(2, 2)
-    tensor[0, 0] = 1
-    tensor[1, 0] = 2
-    tensor[0, 1] = 3
-    tensor[1, 1] = 4
+    var tensor: SWKIntTensor!
+
+    before {
+      tensor = SWKIntTensor(2, 2)
+      // 1 3
+      // 2 4
+      tensor[0, 0] = 1
+      tensor[1, 0] = 2
+      tensor[0, 1] = 3
+      tensor[1, 1] = 4
+    }
 
     it("has 1 at (0, 0)") {
       expect(tensor[0, 0]).to.eq(1)
@@ -65,57 +73,70 @@ private func spec_subscript() {
 }
 
 private func spec_initFrom1DArray() {
-  let tensor = SWKIntTensor([1, 2, 3])
-
   describe("init from 1D array") {
-    it("has size 3") {
-      expect(tensor.size.dimensions).to.eq([3])
+    let data: [SWKInt] = [1, 2, 3]
+    var tensor: SWKIntTensor!
+
+    before {
+      tensor = SWKIntTensor(data: data)
+    }
+
+    it("has size \(data.count)") {
+      expect(tensor.size.dimensions).to.eq([data.count])
     }
 
     it("contains all elements from array") {
-      expect(tensor[0]).to.eq(1)
-      expect(tensor[1]).to.eq(2)
-      expect(tensor[2]).to.eq(3)
+      for (i, value) in data.enumerated() {
+        expect(tensor[i]).to.eq(value)
+      }
     }
   }
 }
 
 private func spec_initFrom2DArray() {
-  let tensor = SWKIntTensor([[1, 2, 3], [4, 5, 6]])
-
   describe("init from 2D array") {
+    let data: [[SWKInt]] = [[1, 2, 3], [4, 5, 6]]
+    var tensor: SWKIntTensor!
+
+    before {
+      tensor = SWKIntTensor(data: data)
+    }
+
     it("has size 2x3") {
       expect(tensor.size.dimensions).to.eq([2, 3])
     }
 
     it("contains all elements from array") {
-      expect(tensor[0, 0]).to.eq(1)
-      expect(tensor[0, 1]).to.eq(2)
-      expect(tensor[0, 2]).to.eq(3)
-      expect(tensor[1, 0]).to.eq(4)
-      expect(tensor[1, 1]).to.eq(5)
-      expect(tensor[1, 2]).to.eq(6)
+      for (i, arr1) in data.enumerated() {
+        for (j, value) in arr1.enumerated() {
+          expect(tensor[i, j]).to.eq(value)
+        }
+      }
     }
   }
 }
 
 public func spec_initFrom3DArray() {
-  let tensor = SWKIntTensor([[[1, 2], [3, 4]], [[5, 6], [7, 8]]])
-
   describe("init from 3D array") {
+    let data: [[[SWKInt]]] = [[[1, 2], [3, 4]], [[5, 6], [7, 8]]]
+    var tensor: SWKIntTensor!
+
+    before {
+      tensor = SWKIntTensor(data: data)
+    }
+
     it("has size 2x2x2") {
       expect(tensor.size.dimensions).to.eq([2, 2, 2])
     }
 
     it("contains all elements from array") {
-      expect(tensor[0, 0, 0]).to.eq(1)
-      expect(tensor[0, 0, 1]).to.eq(2)
-      expect(tensor[0, 1, 0]).to.eq(3)
-      expect(tensor[0, 1, 1]).to.eq(4)
-      expect(tensor[1, 0, 0]).to.eq(5)
-      expect(tensor[1, 0, 1]).to.eq(6)
-      expect(tensor[1, 1, 0]).to.eq(7)
-      expect(tensor[1, 1, 1]).to.eq(8)
+      for (i, arr2) in data.enumerated() {
+        for (j, arr1) in arr2.enumerated() {
+          for (k, value) in arr1.enumerated() {
+            expect(tensor[i, j, k]).to.eq(value)
+          }
+        }
+      }
     }
   }
 }

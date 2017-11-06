@@ -7,7 +7,7 @@
 // Copyright (c) 2017 Dimitri Kurashvili. All rights reserved
 //
 
-public class SWKTensor<T>: CustomStringConvertible {
+public class SWKTensor<T: Comparable>: CustomStringConvertible {
   /// Storage.
   public let storage: SWKStorage<T>
 
@@ -33,7 +33,7 @@ public class SWKTensor<T>: CustomStringConvertible {
   }
 
   /// Create SWKTensor from 1D array.
-  convenience public init(_ arr1: [T]) {
+  convenience public init(data arr1: [T]) {
     self.init(calculateSize(arr1))
 
     for (i, val) in arr1.enumerated() {
@@ -42,7 +42,7 @@ public class SWKTensor<T>: CustomStringConvertible {
   }
 
   /// Create SWKTensor from 2D array.
-  convenience public init(_ arr2: [[T]]) {
+  convenience public init(data arr2: [[T]]) {
     self.init(calculateSize(arr2))
 
     for (i, arr1) in arr2.enumerated() {
@@ -53,7 +53,7 @@ public class SWKTensor<T>: CustomStringConvertible {
   }
 
   /// Create SWKTensor from 3D array.
-  convenience public init(_ arr3: [[[T]]]) {
+  convenience public init(data arr3: [[[T]]]) {
     self.init(calculateSize(arr3))
 
     for (i, arr2) in arr3.enumerated() {
@@ -110,20 +110,27 @@ public class SWKTensor<T>: CustomStringConvertible {
   }
 }
 
+public typealias SWKByte   = Int8
+public typealias SWKShort  = Int16
+public typealias SWKInt    = Int32
+public typealias SWKLong   = Int64
+public typealias SWKFloat  = Float
+public typealias SWKDouble = Double
+
 /// Byte tensor.
-public typealias SWKByteTensor   = SWKTensor<Int8>
+public typealias SWKByteTensor   = SWKTensor<SWKByte>
 
 /// Short tensor.
-public typealias SWKShortTensor  = SWKTensor<Int16>
+public typealias SWKShortTensor  = SWKTensor<SWKShort>
 
 /// Int tensor.
-public typealias SWKIntTensor    = SWKTensor<Int32>
+public typealias SWKIntTensor    = SWKTensor<SWKInt>
 
 /// Long tensor.
-public typealias SWKLongTensor   = SWKTensor<Int64>
+public typealias SWKLongTensor   = SWKTensor<SWKLong>
 
 /// Float tensor.
-public typealias SWKFloatTensor  = SWKTensor<Float>
+public typealias SWKFloatTensor  = SWKTensor<SWKFloat>
 
 /// Double tensor.
-public typealias SWKDoubleTensor = SWKTensor<Double>
+public typealias SWKDoubleTensor = SWKTensor<SWKDouble>

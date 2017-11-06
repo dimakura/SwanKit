@@ -67,15 +67,15 @@ private func spec_calculateSize() {
     }
   }
 
-  test1DArray(array: [Int](), size: SWKSize())
-  test1DArray(array: [1, 2, 3], size: SWKSize(3))
+  test1DArray(array: [Int](),                  size: SWKSize())
+  test1DArray(array: [1, 2, 3],                size: SWKSize(3))
 
-  test2DArray(array: [[Int]](), size: SWKSize())
-  test2DArray(array: [[], [4, 5, 6]], size: SWKSize())
-  test2DArray(array: [[1, 2, 3], [4, 5, 6]], size: SWKSize(2, 3))
+  test2DArray(array: [[Int]](),                size: SWKSize())
+  test2DArray(array: [[], [4, 5, 6]],          size: SWKSize())
+  test2DArray(array: [[1, 2, 3], [4, 5, 6]],   size: SWKSize(2, 3))
 
-  test3DArray(array: [[[Int]]](), size: SWKSize())
-  test3DArray(array: [[[], [1, 2]]], size: SWKSize())
+  test3DArray(array: [[[Int]]](),              size: SWKSize())
+  test3DArray(array: [[[], [1, 2]]],           size: SWKSize())
   test3DArray(array: [[[1, 2, 3], [4, 5, 6]]], size: SWKSize(1, 2, 3))
 }
 
