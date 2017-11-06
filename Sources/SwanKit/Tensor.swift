@@ -1,3 +1,4 @@
+/// Tensor is the main object of SwanKit.
 public class SWKTensor<T: Comparable>: CustomStringConvertible {
   /// Storage.
   public let storage: SWKStorage<T>
