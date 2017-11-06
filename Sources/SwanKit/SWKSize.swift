@@ -1,13 +1,3 @@
-//
-// SwanKit
-// SWKSize.swift
-//
-// Created by Dimitri Kurashvili on 2017-10-13
-//
-// Copyright (c) 2017 Dimitri Kurashvili. All rights reserved
-//
-
-
 /// `SWKSize` describes tensor dimensionality.
 ///
 /// ```swift

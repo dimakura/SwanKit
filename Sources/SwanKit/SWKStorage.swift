@@ -1,12 +1,3 @@
-//
-// SwanKit
-// SWKStorage.swift
-//
-// Created by Dimitri Kurashvili on 2017-10-14
-//
-// Copyright (c) 2017 Dimitri Kurashvili. All rights reserved
-//
-
 /// You don't usually create `SWKStorage` as it's automatically allocated in tensors.
 /// In case you still need to create storage yourself, there are two ways how to do it:
 ///

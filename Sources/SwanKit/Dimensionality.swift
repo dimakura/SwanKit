@@ -1,12 +1,3 @@
-//
-// SwanKit
-// Dimensionality.swift
-//
-// Created by Dimitri Kurashvili on 2017-10-16
-//
-// Copyright (c) 2017 Dimitri Kurashvili. All rights reserved
-//
-
 /// Cut array on the first zero member.
 ///
 /// ```swift
