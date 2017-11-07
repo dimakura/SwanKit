@@ -77,8 +77,12 @@ public class SWKTensor<T: Comparable>: CustomStringConvertible {
     size.transpose(dim1: dim1, dim2: dim2)
   }
 
+  /// Is storage for this tensor contiguous?
+  public func isContiguous() -> Bool {
+    return stride.isContiguous(size: size)
+  }
+
   // TODO: isTransposed
-  // TODO: isContiguous
   // TODO: clone
 
   /// Represent this size as a String.

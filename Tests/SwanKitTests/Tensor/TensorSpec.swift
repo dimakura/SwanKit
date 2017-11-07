@@ -20,6 +20,10 @@ private func spec_creation() {
     it("has storage of size 15") {
       expect(tensor.storage.size).to.eq(15)
     }
+
+    it("is contiguous") {
+      expect(tensor.isContiguous()).to.beTrue
+    }
   }
 }
 
@@ -155,6 +159,10 @@ private func spec_transpose() {
       expect(tensor[0, 1]).to.eq(4)
       expect(tensor[1, 1]).to.eq(5)
       expect(tensor[2, 1]).to.eq(6)
+    }
+
+    it("is not contiguous") {
+      expect(tensor.isContiguous()).to.beFalse
     }
   }
 }
