@@ -4,7 +4,11 @@
 /// let size = SWKSize(5, 3)
 /// size.capacity // 15
 /// ````
-public class SWKSize: CustomStringConvertible {
+public class SWKSize: CustomStringConvertible, Equatable {
+  public static func == (lhs: SWKSize, rhs: SWKSize) -> Bool {
+    return lhs.dimensions == rhs.dimensions
+  }
+
   private var _dimensions: [Int]
 
   /// Number of elements this size can contain.

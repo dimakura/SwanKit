@@ -73,5 +73,21 @@ func spec_SWKSize() {
       testTranspose(dimensions: [5, 2, 3], dim1: 0, dim2: 2, expectedDimensions: [3, 2, 5])
       testTranspose(dimensions: [5, 2, 3], dim1: 0, dim2: 9, expectedDimensions: [5, 2, 3])
     }
+
+    describe("Equatable interface") {
+      var size: SWKSize!
+
+      before {
+        size = SWKSize(1, 2, 3)
+      }
+
+      it("is equal to 1x2x3 size") {
+        expect(SWKSize([1, 2, 3])).to.eq(size)
+      }
+
+      it("is not equal to 2x1x3 size") {
+        expect(SWKSize([2, 1, 3])).to.not.eq(size)
+      }
+    }
   }
 }
