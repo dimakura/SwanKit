@@ -18,6 +18,10 @@ public class SWKDimensional: Equatable {
     self.init(dimensions)
   }
 
+  public subscript(index: Int) -> Int {
+    return _dimensions[index]
+  }
+
   /// Returns true if size has no dimensions.
   public var isEmpty: Bool {
     return _dimensions.isEmpty

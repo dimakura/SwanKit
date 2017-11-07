@@ -24,6 +24,10 @@ private func spec_creation() {
     it("is contiguous") {
       expect(tensor.isContiguous()).to.beTrue
     }
+
+    it("is not transposed") {
+      expect(tensor.isTransposed()).to.beFalse
+    }
   }
 }
 
@@ -163,6 +167,10 @@ private func spec_transpose() {
 
     it("is not contiguous") {
       expect(tensor.isContiguous()).to.beFalse
+    }
+
+    it("is transposed") {
+      expect(tensor.isTransposed()).to.beTrue
     }
   }
 }

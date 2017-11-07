@@ -82,6 +82,30 @@ public class SWKTensor<T: Comparable>: CustomStringConvertible {
     return stride.isContiguous(size: size)
   }
 
+  /// Is tensor transposed?
+  public func isTransposed() -> Bool {
+    if isContiguous() { return false }
+
+    var maxStride = 1
+    var sizeMaxStride = 1
+    var z = 1
+
+    for d in 0..<size.numberOfDimensions {
+      if stride[d] == 0 && size[d] != 1 {
+        return false
+      }
+
+      if stride[d] > maxStride {
+        maxStride = stride[d]
+        sizeMaxStride = size[d]
+      }
+
+      z *= size[d]
+    }
+
+    return z == maxStride * sizeMaxStride
+  }
+
   // TODO: isTransposed
   // TODO: clone
 
