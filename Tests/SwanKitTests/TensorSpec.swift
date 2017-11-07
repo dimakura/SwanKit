@@ -14,7 +14,7 @@ private func spec_creation() {
     }
 
     it("has stride [3, 1]") {
-      expect(tensor.stride).to.eq([3, 1])
+      expect(tensor.stride.dimensions).to.eq([3, 1])
     }
 
     it("has storage of size 15") {

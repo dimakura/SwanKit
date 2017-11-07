@@ -10,12 +10,12 @@ public class SWKTensor<T: Comparable>: CustomStringConvertible {
   public let offset: Int = 0 // XXX: not sure if we even need this
 
   /// Storage stride.
-  public let stride: [Int]
+  public let stride: SWKStride
 
   /// Create SWKTensor of given size.
   public init(_ size: SWKSize) {
     self.size = size
-    self.stride = calculateStride(size.dimensions)
+    self.stride = SWKStride(size: size)
     storage = SWKStorage<T>(size.capacity)
   }
 
@@ -57,7 +57,8 @@ public class SWKTensor<T: Comparable>: CustomStringConvertible {
     }
   }
 
-  /// Converts given dimension into storage index.
+  // TODO: move this to SWKStride
+  /// Converts dimension into storage index.
   ///
   /// It uses the following formula for doing so:
   ///
@@ -66,9 +67,10 @@ public class SWKTensor<T: Comparable>: CustomStringConvertible {
   /// - ...
   /// - ND: storageIndex = offset + index0 * stride0 + index1 * stride1 + ... + indexN * strideN
   private func storageIndex(_ indices: [Int]) -> Int {
-    return indices.enumerated().reduce(offset) { (acc: Int, indx: (Int, Int)) in acc + indx.1 * stride[indx.0] }
+    return indices.enumerated().reduce(offset) { (acc: Int, indx: (Int, Int)) in acc + indx.1 * stride.dimensions[indx.0] }
   }
 
+  // TODO: move this to SWKSize
   /// Test if given indices are in tensor range.
   private func indexInRange(_ indices: [Int]) -> Bool {
     if indices.count != size.numberOfDimensions {
@@ -102,20 +104,24 @@ public class SWKTensor<T: Comparable>: CustomStringConvertible {
   }
 }
 
-/// Byte tensor.
-public typealias SWKByteTensor   = SWKTensor<SWKByte>
+/// Calculates size for 1-dimensional array.
+private func calculateSize<T>(_ arr1: [T]) -> SWKSize {
+  return SWKSize(arr1.count)
+}
 
-/// Short tensor.
-public typealias SWKShortTensor  = SWKTensor<SWKShort>
+/// Calculates size for 2-dimensional array.
+private func calculateSize<T>(_ arr2: [[T]]) -> SWKSize {
+  let d1 = arr2.count
+  let d2 = d1 > 0 ? arr2[0].count : 0
+  guard d1 > 0 && d2 > 0 else { return SWKSize() }
+  return SWKSize(d1, d2)
+}
 
-/// Int tensor.
-public typealias SWKIntTensor    = SWKTensor<SWKInt>
-
-/// Long tensor.
-public typealias SWKLongTensor   = SWKTensor<SWKLong>
-
-/// Float tensor.
-public typealias SWKFloatTensor  = SWKTensor<SWKFloat>
-
-/// Double tensor.
-public typealias SWKDoubleTensor = SWKTensor<SWKDouble>
+/// Calculates size for 3-dimensional array.
+private func calculateSize<T>(_ arr3: [[[T]]]) -> SWKSize {
+  let d1 = arr3.count
+  let d2 = d1 > 0 ? arr3[0].count : 0
+  let d3 = d2 > 0 ? arr3[0][0].count : 0
+  guard d1 > 0 && d2 > 0 && d3 > 0 else { return SWKSize() }
+  return SWKSize(d1, d2, d3)
+}
