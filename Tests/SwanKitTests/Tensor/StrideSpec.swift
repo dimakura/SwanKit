@@ -44,7 +44,7 @@ private func spec_storageIndex() {
       }
 
       for i in 0..<5 {
-        testStorageIndex(tensorIndex: [i, 0], storageIndex: 3 * i)
+        testStorageIndex(tensorIndex: [i, 0], storageIndex: 3 * i + 0)
         testStorageIndex(tensorIndex: [i, 1], storageIndex: 3 * i + 1)
         testStorageIndex(tensorIndex: [i, 2], storageIndex: 3 * i + 2)
       }
@@ -56,9 +56,47 @@ private func spec_storageIndex() {
       }
 
       for i in 0..<5 {
-        testStorageIndex(tensorIndex: [i, 0], storageIndex: offset + 3 * i)
-        testStorageIndex(tensorIndex: [i, 1], storageIndex: offset + 3 * i + 1)
-        testStorageIndex(tensorIndex: [i, 2], storageIndex: offset + 3 * i + 2)
+        testStorageIndex(tensorIndex: [i, 0], storageIndex: 3 * i + 1)
+        testStorageIndex(tensorIndex: [i, 1], storageIndex: 3 * i + 2)
+        testStorageIndex(tensorIndex: [i, 2], storageIndex: 3 * i + 3)
+      }
+    }
+  }
+}
+
+private func spec_isContiguous() {
+  describe("#isContiguous") {
+    var size: SWKSize!
+    var stride: SWKStride!
+
+    before {
+      size = SWKSize(5, 3)
+      stride = SWKStride(size: size)
+    }
+
+    it("is contiguous") {
+      expect(stride.isContiguous(size: size)).to.beTrue
+    }
+
+    context("transposed stride & size") {
+      before {
+        stride.transpose()
+        size.transpose()
+      }
+
+      it("is not contiguous") {
+        expect(stride.isContiguous(size: size)).to.beFalse
+      }
+
+      context("restore original") {
+        before {
+          stride.transpose()
+          size.transpose()
+        }
+
+        it("is contiguous") {
+          expect(stride.isContiguous(size: size)).to.beTrue
+        }
       }
     }
   }
@@ -68,5 +106,6 @@ func spec_SWKStride() {
   describe("SWKStride") {
     spec_initialization()
     spec_storageIndex()
+    spec_isContiguous()
   }
 }

@@ -17,6 +17,13 @@ public class SWKStride: SWKDimensional {
   public func storageIndex(offset: Int, indices: [Int]) -> Int {
     return indices.enumerated().reduce(offset) { (acc: Int, index: (Int, Int)) in acc + index.1 * dimensions[index.0] }
   }
+
+  /// Does this stride correspond to contigious storage?
+  public func isContiguous(size: SWKSize) -> Bool {
+    // More efficient way would be to make loop and exit on first mistmatch
+    // instead of comparing full stride dimensions.
+    return calculateStride(size.dimensions) == dimensions
+  }
 }
 
 /// Converts size dimensions into stride dimensions.
