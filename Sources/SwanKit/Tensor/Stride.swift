@@ -1,5 +1,5 @@
 /// We use stride to convert tensor indices to storage indices.
-public class SWKStride: SWKDimensinal {
+public class SWKStride: SWKDimensional {
   /// Creates stride from size.
   /// You should usually use this constructor.
   public init(size: SWKSize) {

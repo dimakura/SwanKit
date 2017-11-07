@@ -1,5 +1,5 @@
 /// `SWKSize` describes tensor dimensionality.
-public class SWKSize: SWKDimensinal, CustomStringConvertible {
+public class SWKSize: SWKDimensional, CustomStringConvertible {
   /// Creates instance of `SWKSize`.
   /// This constructor cuts dimensions on first non-zero element.
   override public init(_ dimensions: [Int]) {

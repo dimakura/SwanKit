@@ -1,7 +1,7 @@
 /// Base class for dimensional objects like size and stride.
-public class SWKDimensinal: Equatable {
+public class SWKDimensional: Equatable {
   /// If all dimensions are equal for two dimensional objects, they are equal.
-  public static func == (lhs: SWKDimensinal, rhs: SWKDimensinal) -> Bool {
+  public static func == (lhs: SWKDimensional, rhs: SWKDimensional) -> Bool {
     return lhs.dimensions == rhs.dimensions
   }
 
