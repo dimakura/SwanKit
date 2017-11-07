@@ -4,25 +4,33 @@ import SwanKit
 func spec_SWKDevise() {
   describe("SWKDevice") {
     context("default device") {
-      it("is CPU") {
+      it("is .CPU") {
         expect(SWKConfig.currentDevice).to.eq(SWKDevice.CPU)
       }
     }
 
-    func testIsCPU(_ device: SWKDevice, isCPU: Bool, isGPU: Bool) {
-      context("when \(device)") {
-        it("is \(isCPU ? "" : "not ")CPU") {
-          expect(device.isCPU).to.eq(isCPU)
-        }
+    describe(".CPU") {
+      let device = SWKDevice.CPU
 
-        it("is \(isGPU ? "" : "not ")GPU") {
-          expect(device.isGPU).to.eq(isGPU)
-        }
+      it("is CPU") {
+        expect(device).to.beCPU
+      }
+
+      it("is not GPU") {
+        expect(device).to.not.beGPU
       }
     }
 
-    testIsCPU(SWKDevice.CPU,   isCPU: true,  isGPU: false)
-    testIsCPU(SWKDevice.Metal, isCPU: false, isGPU: true)
-    testIsCPU(SWKDevice.CUDA,  isCPU: false, isGPU: true)
+    for device in [SWKDevice.Metal, SWKDevice.CUDA] {
+      describe("\(device)") {
+        it("is not CPU") {
+          expect(device).to.not.beCPU
+        }
+
+        it("is GPU") {
+          expect(device).to.beGPU
+        }
+      }
+    }
   }
 }
