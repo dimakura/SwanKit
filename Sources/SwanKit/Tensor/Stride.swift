@@ -6,7 +6,6 @@ public class SWKStride: SWKDimensional {
     super.init(calculateStride(size.dimensions))
   }
 
-  // TODO: add specs
   /// Converts tensor index to storage index.
   ///
   /// This method uses the following formula for doing so:
