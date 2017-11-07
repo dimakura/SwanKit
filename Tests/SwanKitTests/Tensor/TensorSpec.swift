@@ -107,7 +107,7 @@ private func spec_initFrom2DArray() {
   }
 }
 
-public func spec_initFrom3DArray() {
+private func spec_initFrom3DArray() {
   describe("init from 3D array") {
     let data: [[[SWKInt]]] = [[[1, 2], [3, 4]], [[5, 6], [7, 8]]]
     var tensor: SWKIntTensor!
@@ -132,6 +132,33 @@ public func spec_initFrom3DArray() {
   }
 }
 
+private func spec_transpose() {
+  describe("#transpose") {
+    var tensor: SWKIntTensor!
+
+    before {
+      tensor = SWKIntTensor(data: [[1, 2, 3], [4, 5, 6]])
+      tensor.transpose()
+    }
+
+    it("has size 3x2") {
+      expect(tensor.size.dimensions).to.eq([3, 2])
+    }
+
+    it("column[0] is [1, 2, 3]") {
+      expect(tensor[0, 0]).to.eq(1)
+      expect(tensor[1, 0]).to.eq(2)
+      expect(tensor[2, 0]).to.eq(3)
+    }
+
+    it("column[1] is [4, 5, 6]") {
+      expect(tensor[0, 1]).to.eq(4)
+      expect(tensor[1, 1]).to.eq(5)
+      expect(tensor[2, 1]).to.eq(6)
+    }
+  }
+}
+
 func spec_SWKTensor() {
   describe("SWKTensor") {
     spec_creation()
@@ -139,5 +166,6 @@ func spec_SWKTensor() {
     spec_initFrom1DArray()
     spec_initFrom2DArray()
     spec_initFrom3DArray()
+    spec_transpose()
   }
 }

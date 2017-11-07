@@ -71,7 +71,12 @@ public class SWKTensor<T: Comparable>: CustomStringConvertible {
     }
   }
 
-  // TODO: transpose
+  /// Transpose this tensor.
+  public func transpose(dim1: Int = 0, dim2: Int = 1) {
+    stride.transpose(dim1: dim1, dim2: dim2)
+    size.transpose(dim1: dim1, dim2: dim2)
+  }
+
   // TODO: isTransposed
   // TODO: isContiguous
   // TODO: clone
