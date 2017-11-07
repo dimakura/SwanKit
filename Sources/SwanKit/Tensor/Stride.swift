@@ -5,6 +5,19 @@ public class SWKStride: SWKDimensional {
   public init(size: SWKSize) {
     super.init(calculateStride(size.dimensions))
   }
+
+  // TODO: add specs
+  /// Converts tensor index to storage index.
+  ///
+  /// This method uses the following formula for doing so:
+  ///
+  /// - 1-D array: `storageIndex = offset + index_0 * stride_0`
+  /// - 2-D array: `storageIndex = offset + index_0 * stride_0 + index_1 * stride_1`
+  /// - ...
+  /// - n-D array: `storageIndex = offset + index_0 * stride_0 + index_1 * stride_1 + ... + index_n * stride_n`
+  public func storageIndex(offset: Int, indices: [Int]) -> Int {
+    return indices.enumerated().reduce(offset) { (acc: Int, index: (Int, Int)) in acc + index.1 * dimensions[index.0] }
+  }
 }
 
 /// Converts size dimensions into stride dimensions.

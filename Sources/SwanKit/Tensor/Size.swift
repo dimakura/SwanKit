@@ -12,6 +12,22 @@ public class SWKSize: SWKDimensional, CustomStringConvertible {
     return dimensions.isEmpty ? 0 : dimensions.reduce(1, *)
   }
 
+  // TODO: specs
+  /// Test if given indices are in tensor range.
+  public func indexInRange(_ indices: [Int]) -> Bool {
+    if indices.count != numberOfDimensions {
+      return false
+    }
+
+    for (i, dimension) in indices.enumerated() {
+      if dimension < 0 || dimension > dimensions[i] {
+        return false
+      }
+    }
+
+    return true
+  }
+
   /// String representation.
   public var description: String {
     return dimensions.map {"\($0)"}.joined(separator: "x")

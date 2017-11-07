@@ -57,46 +57,24 @@ public class SWKTensor<T: Comparable>: CustomStringConvertible {
     }
   }
 
-  // TODO: move this to SWKStride
-  /// Converts dimension into storage index.
-  ///
-  /// It uses the following formula for doing so:
-  ///
-  /// - 1D: storageIndex = offset + index0 * stride0
-  /// - 2D: storageIndex = offset + index0 * stride0 + index1 * stride1
-  /// - ...
-  /// - ND: storageIndex = offset + index0 * stride0 + index1 * stride1 + ... + indexN * strideN
-  private func storageIndex(_ indices: [Int]) -> Int {
-    return indices.enumerated().reduce(offset) { (acc: Int, indx: (Int, Int)) in acc + indx.1 * stride.dimensions[indx.0] }
-  }
-
-  // TODO: move this to SWKSize
-  /// Test if given indices are in tensor range.
-  private func indexInRange(_ indices: [Int]) -> Bool {
-    if indices.count != size.numberOfDimensions {
-      return false
-    }
-
-    for (i, dimension) in indices.enumerated() {
-      if dimension < 0 || dimension > size.dimensions[i] {
-        return false
-      }
-    }
-
-    return true
-  }
-
   public subscript(indices: Int...) -> T {
     get {
-      assert(indexInRange(indices), "Indices out of bounds: \(indices)")
-      return storage[storageIndex(indices)]
+      assert(size.indexInRange(indices), "Indices out of bounds: \(indices)")
+      let index = stride.storageIndex(offset: offset, indices: indices)
+      return storage[index]
     }
 
     set {
-      assert(indexInRange(indices), "Indices out of bounds: \(indices)")
-      storage[storageIndex(indices)] = newValue
+      assert(size.indexInRange(indices), "Indices out of bounds: \(indices)")
+      let index = stride.storageIndex(offset: offset, indices: indices)
+      storage[index] = newValue
     }
   }
+
+  // TODO: transpose
+  // TODO: isTransposed
+  // TODO: isContiguous
+  // TODO: clone
 
   /// Represent this size as a String.
   public var description: String {
