@@ -14,15 +14,14 @@
 /// print(storage[5])          // 6.0 -- value of the 6th element
 /// ```
 public class SWKStorage<T> {
-  private var _ptr: UnsafeMutablePointer<T>
-  private var _size: Int
-
-  fileprivate var _device: SWKDevice?
+  var storage: UnsafeMutablePointer<T>
+  var _size: Int
+  var _device: SWKDevice?
 
   /// Creates uninitialized storage of given size.
   public init(_ size: Int) {
     _size = size
-    _ptr = UnsafeMutablePointer<T>.allocate(capacity: size)
+    storage = UnsafeMutablePointer<T>.allocate(capacity: size)
   }
 
   /// Creates storage from the given array.
@@ -31,14 +30,14 @@ public class SWKStorage<T> {
 
     // XXX: not optimal!
     for i in 0..<_size {
-      _ptr[i] = data[i]
+      storage[i] = data[i]
     }
   }
 
   deinit {
     // Swift counts referecences for us 🎉.
     // All we need todo is to free the allocated memory.
-    _ptr.deallocate(capacity: _size)
+    storage.deallocate(capacity: _size)
   }
 
   private func indexInRange(_ index: Int) -> Bool {
@@ -48,17 +47,28 @@ public class SWKStorage<T> {
   public subscript(index: Int) -> T {
     get {
       assert(indexInRange(index), "Index out of bounds: \(index)")
-      return _ptr[index]
+      return storage[index]
     }
     set {
       assert(indexInRange(index), "Index out of bounds: \(index)")
-      _ptr[index] = newValue
+      storage[index] = newValue
     }
   }
 
   /// Number of elements in this storage.
   public var size: Int {
     return _size
+  }
+
+  /// Size as Int32.
+  var size32: Int32 {
+    get {
+      return Int32(_size)
+    }
+
+    set {
+      _size = Int(truncatingIfNeeded: newValue)
+    }
   }
 
   /// Number of bytes occupied by single element.
@@ -71,6 +81,7 @@ public class SWKStorage<T> {
     get {
       return _device ?? SWKConfig.currentDevice
     }
+
     set {
       _device = newValue
     }
@@ -100,7 +111,7 @@ public class SWKStorage<T> {
   public func fill(_ value: T) {
     // XXX: not optimal!
     for i in 0..<size {
-      _ptr[i] = value
+      storage[i] = value
     }
   }
 }
