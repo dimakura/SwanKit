@@ -1,12 +1,3 @@
-//
-// SwanKit
-// SWKStorageSpec.swift
-//
-// Created by Dimitri Kurashvili on 2017-10-14
-//
-// Copyright (c) 2017 Dimitri Kurashvili. All rights reserved
-//
-
 import SSpec
 import SwanKit
 
@@ -95,31 +86,26 @@ private func spec_SWKStorage_device() {
 
 private func spec_SWKStorage_subscript() {
   describe("storage [1, 2, 3, 4, 5]") {
-    // TODO: before needed here (SSpec issue #3)
-    let storage = SWKIntStorage([1, 2, 3, 4, 5])
+    var storage: SWKIntStorage!
+
+    before {
+      storage = SWKIntStorage([1, 2, 3, 4, 5])
+    }
 
     it("has size 5") {
       expect(storage.size).to.eq(5)
     }
 
-    for i in 0..<storage.size {
-      it("storage[\(i)] == \(i + 1)") {
-        let expectedValue = Int32(truncatingIfNeeded: i + 1)
+    it("has initial values") {
+      for i in 0..<storage.size {
+        let expectedValue = SWKInt(truncatingIfNeeded: i + 1)
         expect(storage[i]).to.eq(expectedValue)
       }
     }
 
     it("can update values") {
-      storage[0] = 10
-      storage[1] = 9
-      storage[2] = 8
-      storage[3] = 7
-      storage[4] = 6
-      expect(storage[0]).to.eq(10)
-      expect(storage[1]).to.eq(9)
-      expect(storage[2]).to.eq(8)
-      expect(storage[3]).to.eq(7)
-      expect(storage[4]).to.eq(6)
+      storage[0] = 42
+      expect(storage[0]).to.eq(42)
     }
   }
 }
@@ -136,8 +122,12 @@ private func spec_SWKStorage_conversions() {
 
 private func spec_SWKStorage_fill_operations() {
   context("when filling with zeros") {
-    let storage = SWKFloatStorage(5)
-    storage.zeros()
+    var storage: SWKFloatStorage!
+
+    before {
+      storage = SWKFloatStorage(5)
+      storage.zeros()
+    }
 
     it("contains all zeros") {
       for i in 0..<5 {
@@ -147,8 +137,14 @@ private func spec_SWKStorage_fill_operations() {
   }
 
   describe("when filling with ones") {
-    let storage = SWKFloatStorage(5)
-    storage.ones()
+    var storage: SWKFloatStorage!
+
+    before {
+      storage = SWKFloatStorage(5)
+      storage.ones()
+    }
+
+
 
     it("contains all ones") {
       for i in 0..<5 {

@@ -1,12 +1,3 @@
-//
-// SwanKit
-// SWKStorage.swift
-//
-// Created by Dimitri Kurashvili on 2017-10-14
-//
-// Copyright (c) 2017 Dimitri Kurashvili. All rights reserved
-//
-
 /// You don't usually create `SWKStorage` as it's automatically allocated in tensors.
 /// In case you still need to create storage yourself, there are two ways how to do it:
 ///
@@ -121,21 +112,3 @@ extension SWKStorage where T: SignedNumeric {
     fill(1)
   }
 }
-
-/// Byte storage.
-public typealias SWKByteStorage  = SWKStorage<Int8>
-
-/// Short storage.
-public typealias SWKShortStorage = SWKStorage<Int16>
-
-/// Int storage.
-public typealias SWKIntStorage   = SWKStorage<Int32>
-
-/// Long storage.
-public typealias SWKLongStorage  = SWKStorage<Int64>
-
-/// Float storage.
-public typealias SWKFloatStorage  = SWKStorage<Float>
-
-/// Double storage.
-public typealias SWKDoubleStorage = SWKStorage<Double>
