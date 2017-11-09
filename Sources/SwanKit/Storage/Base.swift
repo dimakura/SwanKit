@@ -55,11 +55,6 @@ public class SWKStorage<T> {
     }
   }
 
-  /// Number of elements in this storage.
-  public var size: Int {
-    return _size
-  }
-
   /// Size as Int32.
   var size32: Int32 {
     get {
@@ -69,6 +64,17 @@ public class SWKStorage<T> {
     set {
       _size = Int(truncatingIfNeeded: newValue)
     }
+  }
+
+  func cloneWith(_ initializer: (SWKStorage<T>) -> Void) ->  SWKStorage<T> {
+    let storage = SWKStorage(size)
+    initializer(storage)
+    return storage
+  }
+
+  /// Number of elements in this storage.
+  public var size: Int {
+    return _size
   }
 
   /// Number of bytes occupied by single element.
