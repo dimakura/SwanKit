@@ -7,7 +7,8 @@ class SwanKitTests: XCTestCase {
       spec_SWKSize()
       spec_SWKStride()
       spec_SWKStorage()
-      spec_FloatStorage()
+      spec_SWKDoubleStorage()
+      spec_SWKFloatStorage()
       spec_SWKTensor()
       spec_SWKDevise()
     }
