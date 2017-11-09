@@ -4,6 +4,18 @@ import Accelerate
 
 /// SWKStorage extensions for Float.
 extension SWKStorage where T == Float {
+  /// Cloning cosine function.
+  public func cos() -> SWKStorage<T> {
+    return cloneWith { newStorage in
+      vvcosf(newStorage.storage, storage, &size32)
+    }
+  }
+
+  /// In-place cosine function.
+  public func cos_() {
+    vvcosf(storage, storage, &size32)
+  }
+
   /// Cloning sine function.
   public func sin() -> SWKStorage<T> {
     return cloneWith { newStorage in
@@ -16,15 +28,87 @@ extension SWKStorage where T == Float {
     vvsinf(storage, storage, &size32)
   }
 
-  /// Cloning cosine function.
-  public func cos() -> SWKStorage<T> {
+  /// Cloning tangent function.
+  public func tan() -> SWKStorage<T> {
     return cloneWith { newStorage in
-      vvcosf(newStorage.storage, storage, &size32)
+      vvtanf(newStorage.storage, storage, &size32)
     }
   }
 
-  /// In-place cosine function.
-  public func cos_() {
-    vvcosf(storage, storage, &size32)
+  /// In-place tangent function.
+  public func tan_() {
+    vvtanf(storage, storage, &size32)
+  }
+
+  /// Cloning arccosine function.
+  public func acos() -> SWKStorage<T> {
+    return cloneWith { newStorage in
+      vvacosf(newStorage.storage, storage, &size32)
+    }
+  }
+
+  /// In-place arccosine function.
+  public func acos_() {
+    vvacosf(storage, storage, &size32)
+  }
+
+  /// Cloning arcsine function.
+  public func asin() -> SWKStorage<T> {
+    return cloneWith { newStorage in
+      vvasinf(newStorage.storage, storage, &size32)
+    }
+  }
+
+  /// In-place arcsine function.
+  public func asin_() {
+    vvasinf(storage, storage, &size32)
+  }
+
+  /// Cloning arctangent function.
+  public func atan() -> SWKStorage<T> {
+    return cloneWith { newStorage in
+      vvatanf(newStorage.storage, storage, &size32)
+    }
+  }
+
+  /// In-place arctangent function.
+  public func atan_() {
+    vvatanf(storage, storage, &size32)
+  }
+
+  /// Cloning hyperbolic cosine function.
+  public func cosh() -> SWKStorage<T> {
+    return cloneWith { newStorage in
+      vvcoshf(newStorage.storage, storage, &size32)
+    }
+  }
+
+  /// In-place hyperbolic cosine function.
+  public func cosh_() {
+    vvcoshf(storage, storage, &size32)
+  }
+
+  /// Cloning hyperbolic sine function.
+  public func sinh() -> SWKStorage<T> {
+    return cloneWith { newStorage in
+      vvsinhf(newStorage.storage, storage, &size32)
+    }
+  }
+
+  /// In-place hyperbolic sine function.
+  public func sinh_() {
+    vvsinhf(storage, storage, &size32)
+  }
+
+  /// Cloning hyperbolic tangent function.
+  public func tanh() -> SWKStorage<T> {
+    return cloneWith { newStorage in
+      vvtanhf(newStorage.storage, storage, &size32)
+    }
+  }
+
+  /// In-place hyperbolic tangent function.
+  public func tanh_() {
+    vvtanhf(storage, storage, &size32)
   }
 }
