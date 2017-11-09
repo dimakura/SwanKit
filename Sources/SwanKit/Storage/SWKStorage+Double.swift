@@ -111,4 +111,40 @@ extension SWKStorage where T == Double {
   public func tanh_() {
     vvtanh(storage, storage, &size32)
   }
+
+  /// Cloning inverse hyperbolic cosine function.
+  public func acosh() -> SWKStorage<T> {
+    return cloneWith { newStorage in
+      vvacosh(newStorage.storage, storage, &size32)
+    }
+  }
+
+  /// In-place inverse hyperbolic cosine function.
+  public func acosh_() {
+    vvacosh(storage, storage, &size32)
+  }
+
+  /// Cloning inverse hyperbolic sine function.
+  public func asinh() -> SWKStorage<T> {
+    return cloneWith { newStorage in
+      vvasinh(newStorage.storage, storage, &size32)
+    }
+  }
+
+  /// In-place inverse hyperbolic sine function.
+  public func asinh_() {
+    vvasinh(storage, storage, &size32)
+  }
+
+  /// Cloning inverse hyperbolic tangent function.
+  public func atanh() -> SWKStorage<T> {
+    return cloneWith { newStorage in
+      vvatanh(newStorage.storage, storage, &size32)
+    }
+  }
+
+  /// In-place inverse hyperbolic tangent function.
+  public func atanh_() {
+    vvatanh(storage, storage, &size32)
+  }
 }

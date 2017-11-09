@@ -358,5 +358,119 @@ func spec_SWKFloatStorage() {
         }
       }
     }
+
+    context("inverse hyperbolic cosine function") {
+      before {
+        storage = SWKFloatStorage([1.0, 3.14159, 6.28])
+      }
+
+      describe("#acosh") {
+        var newStorage: SWKFloatStorage!
+
+        before {
+          newStorage = storage.acosh()
+        }
+
+        it("computes a new storage") {
+          expect(abs(newStorage[0] - acosh(1.0)) < 0.0001).to.beTrue
+          expect(abs(newStorage[1] - acosh(3.14159)) < 0.0001).to.beTrue
+          expect(abs(newStorage[2] - acosh(6.28)) < 0.0001).to.beTrue
+        }
+
+        it("keeps original storage unchanged") {
+          expect(storage[0]).to.eq(1.0)
+          expect(storage[1]).to.eq(3.14159)
+          expect(storage[2]).to.eq(6.28)
+        }
+      }
+
+      describe("#acosh_") {
+        before {
+          storage.acosh_()
+        }
+
+        it("updates original storage") {
+          expect(abs(storage[0] - acosh(1.0)) < 0.0001).to.beTrue
+          expect(abs(storage[1] - acosh(3.14159)) < 0.0001).to.beTrue
+          expect(abs(storage[2] - acosh(6.28)) < 0.0001).to.beTrue
+        }
+      }
+    }
+
+    context("inverse hyperbolic sine function") {
+      before {
+        storage = SWKFloatStorage([1.0, 3.14159, 6.28])
+      }
+
+      describe("#asinh") {
+        var newStorage: SWKFloatStorage!
+
+        before {
+          newStorage = storage.asinh()
+        }
+
+        it("computes a new storage") {
+          expect(abs(newStorage[0] - asinh(1.0)) < 0.0001).to.beTrue
+          expect(abs(newStorage[1] - asinh(3.14159)) < 0.0001).to.beTrue
+          expect(abs(newStorage[2] - asinh(6.28)) < 0.0001).to.beTrue
+        }
+
+        it("keeps original storage unchanged") {
+          expect(storage[0]).to.eq(1.0)
+          expect(storage[1]).to.eq(3.14159)
+          expect(storage[2]).to.eq(6.28)
+        }
+      }
+
+      describe("#asinh_") {
+        before {
+          storage.asinh_()
+        }
+
+        it("updates original storage") {
+          expect(abs(storage[0] - asinh(1.0)) < 0.0001).to.beTrue
+          expect(abs(storage[1] - asinh(3.14159)) < 0.0001).to.beTrue
+          expect(abs(storage[2] - asinh(6.28)) < 0.0001).to.beTrue
+        }
+      }
+    }
+
+    context("inverse hyperbolic tangent function") {
+      before {
+        storage = SWKFloatStorage([0.99, 0.55, 0.3])
+      }
+
+      describe("#atanh") {
+        var newStorage: SWKFloatStorage!
+
+        before {
+          newStorage = storage.atanh()
+        }
+
+        it("computes a new storage") {
+          expect(abs(newStorage[0] - atanh(0.99)) < 0.0001).to.beTrue
+          expect(abs(newStorage[1] - atanh(0.55)) < 0.0001).to.beTrue
+          expect(abs(newStorage[2] - atanh(0.3)) < 0.0001).to.beTrue
+        }
+
+        it("keeps original storage unchanged") {
+          expect(storage[0]).to.eq(0.99)
+          expect(storage[1]).to.eq(0.55)
+          expect(storage[2]).to.eq(0.3)
+        }
+      }
+
+      describe("#atanh_") {
+        before {
+          storage.atanh_()
+        }
+
+        it("updates original storage") {
+          expect(abs(storage[0] - atanh(0.99)) < 0.0001).to.beTrue
+          expect(abs(storage[1] - atanh(0.55)) < 0.0001).to.beTrue
+          expect(abs(storage[2] - atanh(0.3)) < 0.0001).to.beTrue
+        }
+      }
+    }
   }
 }

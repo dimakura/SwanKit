@@ -14,6 +14,9 @@ let mathFunctions = [
   ["name": "cosh", "name_acc":  "vvcosh",  "doc": "hyperbolic cosine function",  "initialValues": [0.0, 3.14159, 6.28]],
   ["name": "sinh", "name_acc":  "vvsinh",  "doc": "hyperbolic sine function",    "initialValues": [0.0, 3.14159, 6.28]],
   ["name": "tanh", "name_acc":  "vvtanh",  "doc": "hyperbolic tangent function", "initialValues": [0.0, 3.14159, 6.28]],
+  ["name": "acosh", "name_acc":  "vvacosh",  "doc": "inverse hyperbolic cosine function",  "initialValues": [1.0, 3.14159, 6.28]],
+  ["name": "asinh", "name_acc":  "vvasinh",  "doc": "inverse hyperbolic sine function",    "initialValues": [1.0, 3.14159, 6.28]],
+  ["name": "atanh", "name_acc":  "vvatanh",  "doc": "inverse hyperbolic tangent function", "initialValues": [0.99, 0.55, 0.3]],
 ]
 
 func accelerateName(type: String, name: String) -> String {
