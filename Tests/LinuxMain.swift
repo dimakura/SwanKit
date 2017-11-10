@@ -1,6 +1,6 @@
 import XCTest
 
-// @testable import ASTTests
+@testable import ASTTests
 @testable import SwanKitTests
 
 XCTMain([
