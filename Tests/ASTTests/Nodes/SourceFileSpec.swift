@@ -7,8 +7,8 @@ func sourceFileSpec() {
 
     before {
       source = AST.SourceFile(path: "Sources/Test.swift")
-      source.addChild(node: AST.Comment(text: "Test Comment"))
-      source.addChild(node: AST.ImportStatement(package: AST.Package(name: "Accelerate")))
+      source.children.append(AST.Comment(text: "Test Comment"))
+      source.children.append(AST.ImportStatement(package: AST.Package(name: "Accelerate")))
     }
 
     it("generates source code") {

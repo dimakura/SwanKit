@@ -9,39 +9,48 @@ let package = Package(
   products: [
     .library(
       name: "SwanKit",
-      targets: ["SwanKit"]),
+      targets: ["SwanKit"]
+    ),
 
     .library(
       name: "AST",
       targets: ["AST"]
+    ),
+
+    .executable(
+      name: "Generator",
+      targets: ["Generator"]
     )
   ],
 
   dependencies: [
-    .package(url: "https://github.com/dimakura/SSpec", from: "0.2.3")
+    .package(url: "https://github.com/dimakura/SSpec", from: "0.2.3"),
   ],
 
   targets: [
     .target(
       name: "SwanKit",
-      dependencies: []),
+      dependencies: []
+    ),
 
     .target(
       name: "AST",
-      dependencies: []),
+      dependencies: []
+    ),
+
+    .target(
+      name: "Generator",
+      dependencies: ["AST"]
+    ),
 
     .testTarget(
       name: "SwanKitTests",
-      dependencies: [
-        "SwanKit",
-        "SSpec"
-      ]),
+      dependencies: ["SwanKit", "SSpec"]
+    ),
 
     .testTarget(
       name: "ASTTests",
-      dependencies: [
-        "AST",
-        "SSpec"
-      ]),
+      dependencies: ["AST", "SSpec"]
+    ),
   ]
 )
