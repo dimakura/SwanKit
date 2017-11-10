@@ -3,7 +3,7 @@ extension AST {
   /// // comment
   /// /// document comment
   /// ```
-  public class Comment: BaseNode {
+  public class Comment: BaseNode, ASTSourceFileChild {
     public enum Kind {
       case Default
       case Document

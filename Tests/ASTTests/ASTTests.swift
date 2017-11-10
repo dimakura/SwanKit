@@ -4,8 +4,9 @@ import SSpec
 class ASTTests: XCTestCase {
   func testAllSpecs() {
     SSpec.run {
-      importStatementSpec()
       commentSpec()
+      importStatementSpec()
+      sourceFileSpec()
     }
 
     XCTAssert(SSpec.hasErrors == false)

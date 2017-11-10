@@ -2,13 +2,13 @@ import SSpec
 import AST
 
 func importStatementSpec() {
-  describe("AST.ImportStatment") {
+  describe("AST.ImportStatement") {
     var package: AST.Package!
-    var packageImport: AST.ImportStatment!
+    var packageImport: AST.ImportStatement!
 
     before {
       package = AST.Package(name: "Accelerate")
-      packageImport = AST.ImportStatment(package: package)
+      packageImport = AST.ImportStatement(package: package)
     }
 
     it("generates import statement") {
