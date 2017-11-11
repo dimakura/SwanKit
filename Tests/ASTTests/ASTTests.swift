@@ -5,6 +5,7 @@ class ASTTests: XCTestCase {
   func testAllSpecs() {
     SSpec.run {
       commentSpec()
+      emptyLineSpec()
       importStatementSpec()
       sourceFileSpec()
     }

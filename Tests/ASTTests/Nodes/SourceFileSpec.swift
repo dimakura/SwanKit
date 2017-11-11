@@ -13,7 +13,7 @@ func sourceFileSpec() {
 
     it("generates source code") {
       let code = source.code(indent: 0)
-      let expectedCode = "// Test Comment\n\nimport Accelerate\n"
+      let expectedCode = "// Test Comment\nimport Accelerate\n"
       expect(code).to.eq(expectedCode)
     }
   }

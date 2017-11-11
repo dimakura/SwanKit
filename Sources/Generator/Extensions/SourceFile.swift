@@ -20,4 +20,12 @@ extension AST.SourceFile {
     let package = AST.Package(name: packageName)
     children.append(AST.ImportStatement(package: package))
   }
+
+  func emptyLine() {
+    emptyLines(1)
+  }
+
+  func emptyLines(_ lines: Int) {
+    children.append(AST.EmptyLine(lines: lines))
+  }
 }
