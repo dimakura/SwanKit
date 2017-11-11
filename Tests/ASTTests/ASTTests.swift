@@ -9,6 +9,7 @@ class ASTTests: XCTestCase {
       emptyLineSpec()
       importStatementSpec()
       sourceFileSpec()
+      typeConstraintSpec()
     }
 
     XCTAssert(SSpec.hasErrors == false)
