@@ -7,7 +7,7 @@ extension AST {
       self.name = name
     }
 
-    public var description: String {
+    public func typeName() -> String {
       return name
     }
   }

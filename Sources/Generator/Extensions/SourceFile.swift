@@ -16,6 +16,10 @@ extension AST.SourceFile {
     children.append(AST.Comment(text: text))
   }
 
+  func docComment(_ text: String) {
+    children.append(AST.Comment(text: text, kind: .Document))
+  }
+
   func packageImport(_ packageName: String) {
     let package = AST.Package(name: packageName)
     children.append(AST.ImportStatement(package: package))
@@ -27,5 +31,11 @@ extension AST.SourceFile {
 
   func emptyLines(_ lines: Int) {
     children.append(AST.EmptyLine(lines: lines))
+  }
+
+  func classExtension(_ subject: AST.Class, _ body: (AST.ClassExtension) -> Void) {
+    let ext = AST.ClassExtension(subject: subject)
+    children.append(ext)
+    body(ext)
   }
 }

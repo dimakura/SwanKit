@@ -1,8 +1,4 @@
 extension AST {
-  /// ```swift
-  /// // comment
-  /// /// document comment
-  /// ```
   public class Comment: BaseNode, ASTSourceFileChild {
     public enum Kind {
       case Default

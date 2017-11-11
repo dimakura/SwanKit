@@ -1,7 +1,4 @@
 extension AST {
-  /// ```swift
-  /// import Accelerate
-  /// ```
   public class ImportStatement: BaseNode, ASTSourceFileChild {
     public let package: Package
 

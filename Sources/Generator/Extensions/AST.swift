@@ -6,4 +6,9 @@ extension AST {
     body(sourceFile)
     return sourceFile.save()
   }
+
+  static func describeClass(_ name: String) -> AST.Class {
+    let subject = AST.Class(name: name)
+    return subject
+  }
 }
