@@ -1,13 +1,5 @@
 fileprivate let singleIndent = "  "
 
-/// `ASTNode` is a general interface for code generation.
-public protocol ASTNode {
-  func code(indent: Int) -> String
-}
-
-/// Node which can be used as a child in `AST.SourceFile`.
-public protocol ASTSourceFileChild: ASTNode {}
-
 extension AST {
   /// This is the base class for all AST nodes.
   public class BaseNode: ASTNode {
