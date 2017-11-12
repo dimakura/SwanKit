@@ -7,8 +7,9 @@ extension AST {
     return sourceFile.save()
   }
 
-  static func describeClass(_ name: String) -> AST.Class {
+  static func describeClass(_ name: String, _ body: (AST.Class) -> Void) -> AST.Class {
     let subject = AST.Class(name: name)
+    body(subject)
     return subject
   }
 }

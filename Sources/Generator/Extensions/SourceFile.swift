@@ -33,9 +33,10 @@ extension AST.SourceFile {
     children.append(AST.EmptyLine(lines: lines))
   }
 
-  func classExtension(_ subject: AST.Class, _ body: (AST.ClassExtension) -> Void) {
+  func classExtension(_ subject: AST.Class, _ body: (AST.ClassExtension) -> Void) -> AST.ClassExtension {
     let ext = AST.ClassExtension(subject: subject)
     children.append(ext)
     body(ext)
+    return ext
   }
 }

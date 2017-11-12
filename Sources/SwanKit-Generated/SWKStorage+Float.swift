@@ -3,5 +3,5 @@
 import Acceleration
 
 /// SWKStorage extensions for Float type.
-extension SWKStorage {
+extension SWKStorage where T == Float {
 }
