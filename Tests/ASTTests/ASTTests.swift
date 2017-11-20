@@ -8,6 +8,7 @@ class ASTTests: XCTestCase {
       commentSpec()
       emptyLineSpec()
       importStatementSpec()
+      methodDeclarationSpec()
       sourceFileSpec()
       typeConstraintSpec()
     }

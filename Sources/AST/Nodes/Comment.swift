@@ -1,5 +1,5 @@
 extension AST {
-  public class Comment: BaseNode, ASTSourceFileChild {
+  public class Comment: BaseNode, ASTSourceFileChild, ASTClassExtensionChild {
     public enum Kind {
       case Default
       case Document

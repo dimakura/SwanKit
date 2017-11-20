@@ -2,6 +2,7 @@ extension AST {
   public class ClassExtension: BaseNode, ASTSourceFileChild {
     public let subject: Class
     public var constraint: TypeConstraint?
+    public var children = [ASTClassExtensionChild]()
 
     public init(subject: Class) {
       self.subject = subject
@@ -19,7 +20,8 @@ extension AST {
         source.append(" ")
       }
       source.append("{\n")
-      // TODO: body here with indent + 1
+      let body = code(nodes: children, indent: indent + 1)
+      source.append(body)
       source.append(indention)
       source.append("}")
       return source
