@@ -1,5 +1,5 @@
 extension AST {
-  public class MethodBody {
+  public class FunctionBody {
     // TODO: children
 
     public init() {}
