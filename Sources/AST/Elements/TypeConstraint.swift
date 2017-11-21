@@ -1,5 +1,5 @@
 extension AST {
-  public enum TypeConstraint: CustomStringConvertible {
+  public enum TypeConstraint {
     case Equality(GenericType, ASTType)
 
     public var description: String {
