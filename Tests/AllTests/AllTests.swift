@@ -3,6 +3,7 @@ import SSpec
 
 class AllTests: XCTestCase {
   func spec_AST() {
+    spec_CodeLine()
     spec_DocComment()
   }
 
