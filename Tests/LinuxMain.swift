@@ -1,6 +1,6 @@
 import XCTest
-@testable import SwanKitTests
+@testable import AllTests
 
 XCTMain([
-  testCase(SwanKitTests.allTests),
+  testCase(AllTests.allTests),
 ])
