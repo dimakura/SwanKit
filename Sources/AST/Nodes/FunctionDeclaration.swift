@@ -11,8 +11,9 @@ extension AST {
     override public func code(indent: Int) -> String {
       var decl = indentionString(indent: indent)
       decl.append(function.signature)
-      // TODO: body
-      decl.append(" {}")
+      decl.append(" {")
+      // TODO: function body
+      decl.append("}")
       return decl
     }
   }
