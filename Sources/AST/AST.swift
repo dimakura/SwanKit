@@ -11,6 +11,14 @@ public struct AST {
       return String(repeating: singleIndent, count: indent)
     }
 
+    func code(nodes: [ASTNode], indent: Int) -> String {
+      var code = ""
+      for node in nodes {
+        code.append(node.code(indent: indent))
+      }
+      return code
+    }
+
     public func code(indent: Int) -> String {
       fatalError("Child class should implement #code method")
     }

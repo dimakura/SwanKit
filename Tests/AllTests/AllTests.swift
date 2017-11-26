@@ -5,6 +5,7 @@ class AllTests: XCTestCase {
   func spec_AST() {
     spec_CodeLine()
     spec_DocComment()
+    spec_Extension()
   }
 
   func spec_SWK() {
