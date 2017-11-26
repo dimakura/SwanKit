@@ -66,12 +66,6 @@ public class SWKStorage<T> {
     }
   }
 
-  func cloneWith(_ initializer: (SWKStorage<T>) -> Void) ->  SWKStorage<T> {
-    let storage = SWKStorage(size)
-    initializer(storage)
-    return storage
-  }
-
   /// Number of elements in this storage.
   public var size: Int {
     return _size

@@ -1,9 +1,9 @@
 import AST
 
-let defaultPath = "Sources/SwanKit-Generated"
+let defaultPath = "Sources/SwanKit/Storage"
 
 func createSourceFile(name: String, path: String = defaultPath, block: (AST.SourceFile) -> Void) {
-  let src = AST.SourceFile(path: "Sources/SwanKit-Generated", name: name)
+  let src = AST.SourceFile(path: path, name: name)
   block(src)
   try! src.generate()
 }
@@ -30,5 +30,11 @@ extension AST.ParentNode {
     ext.whereClause = whereClause
     children.append(ext)
     block(ext)
+  }
+
+  func function(_ name: String, _ returnType: String? = nil, block: (AST.Function) -> Void) {
+    let function = AST.Function(name: name, returnType: returnType)
+    children.append(function)
+    block(function)
   }
 }
