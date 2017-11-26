@@ -4,7 +4,7 @@ import SSpec
 class AllTests: XCTestCase {
   func spec_AST() {
     spec_CodeLine()
-    spec_DocComment()
+    spec_Comment()
     spec_Extension()
     spec_Function()
   }

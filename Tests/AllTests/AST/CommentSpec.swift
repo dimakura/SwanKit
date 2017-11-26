@@ -1,12 +1,12 @@
 import AST
 import SSpec
 
-func spec_DocComment() {
-  describe("AST.DocComment") {
-    var comment: AST.DocComment!
+func spec_Comment() {
+  describe("AST.Comment") {
+    var comment: AST.Comment!
 
     before {
-      comment = AST.DocComment(text: "Line1\nLine2")
+      comment = AST.Comment(text: "Line1\nLine2", isDocument: true)
     }
 
     it("generes comment") {

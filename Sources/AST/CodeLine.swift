@@ -1,5 +1,5 @@
 extension AST {
-  public class CodeLine: AST.BaseNode {
+  public class CodeLine: BaseNode {
     public let line: String;
 
     public init(line: String) {

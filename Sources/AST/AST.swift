@@ -23,4 +23,8 @@ public struct AST {
       fatalError("Child class should implement #code method")
     }
   }
+
+  public class ParentNode: BaseNode {
+    public var children = [ASTNode]()
+  }
 }

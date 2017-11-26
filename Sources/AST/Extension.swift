@@ -1,8 +1,7 @@
 extension AST {
-  public class Extension: BaseNode {
+  public class Extension: ParentNode {
     public let type: String;
     public var whereClause: String? = nil;
-    public var children = [ASTNode]()
 
     public init(type: String) {
       self.type = type;

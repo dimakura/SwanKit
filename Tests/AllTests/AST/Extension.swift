@@ -27,12 +27,12 @@ func spec_Extension() {
 
     context("with children") {
       before {
-        ext.children.append(AST.DocComment(text: "Some comment"))
+        ext.children.append(AST.Comment(text: "Some comment"))
       }
 
       it("generates extension code") {
-        expect(ext.code(indent: 0)).to.eq("extension SWKStorage {\n  /// Some comment\n}\n")
-        expect(ext.code(indent: 1)).to.eq("  extension SWKStorage {\n    /// Some comment\n  }\n")
+        expect(ext.code(indent: 0)).to.eq("extension SWKStorage {\n  // Some comment\n}\n")
+        expect(ext.code(indent: 1)).to.eq("  extension SWKStorage {\n    // Some comment\n  }\n")
       }
     }
   }

@@ -16,10 +16,15 @@ let package = Package(
 
   targets: [
     .target(
-      name: "SwanKit",
+      name: "AST",
       dependencies: []),
     .target(
-      name: "AST",
+      name: "Generator",
+      dependencies: [
+        "AST"
+      ]),
+    .target(
+      name: "SwanKit",
       dependencies: []),
     .testTarget(
       name: "AllTests",

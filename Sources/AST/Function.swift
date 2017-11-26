@@ -1,8 +1,7 @@
 extension AST {
-  public class Function: AST.BaseNode {
+  public class Function: ParentNode {
     public let name: String
     public let returnType: String?
-    public var children = [ASTNode]()
 
     public init(name: String, returnType: String? = nil) {
       self.name = name
