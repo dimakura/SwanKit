@@ -9,6 +9,7 @@ extension AST {
     override public func code(indent: Int) -> String {
       var lineOfCode = indentionString(indent: indent)
       lineOfCode.append(line)
+      lineOfCode.append("\n")
       return lineOfCode
     }
   }

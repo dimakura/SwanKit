@@ -9,7 +9,7 @@ func spec_CodeLine() {
   }
 
   it("generates line of code") {
-    expect(line.code(indent: 0)).to.eq("import Accelerate")
-    expect(line.code(indent: 1)).to.eq("  import Accelerate")
+    expect(line.code(indent: 0)).to.eq("import Accelerate\n")
+    expect(line.code(indent: 1)).to.eq("  import Accelerate\n")
   }
 }
