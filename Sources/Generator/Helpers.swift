@@ -22,7 +22,7 @@ extension AST.ParentNode {
   }
 
   func docComment(_ text: String) {
-    children.append(AST.Comment(text: text, isDocument: true))
+    children.append(AST.Comment(text: text, isDocumentation: true))
   }
 
   func typeExtension(_ type: String, _ whereClause: String, block: (AST.Extension) -> Void) {

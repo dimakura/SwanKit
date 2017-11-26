@@ -1,16 +1,16 @@
 extension AST {
   public class Comment: BaseNode {
     public let text: String;
-    public let isDocument: Bool
+    public let isDocumentation: Bool
 
-    public init(text: String, isDocument: Bool = false) {
+    public init(text: String, isDocumentation: Bool = false) {
       self.text = text
-      self.isDocument = isDocument
+      self.isDocumentation = isDocumentation
     }
 
     override public func code(indent: Int) -> String {
       let indention = indentionString(indent: indent)
-      let starts = isDocument ? "///" : "//"
+      let starts = isDocumentation ? "///" : "//"
       var comment = ""
       for line in text.split(separator: "\n") {
         comment.append(indention)
