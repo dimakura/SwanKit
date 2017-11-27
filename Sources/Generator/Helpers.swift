@@ -1,8 +1,6 @@
 import AST
 
-let defaultPath = "Sources/SwanKit/Storage"
-
-func createSourceFile(name: String, path: String = defaultPath, block: (AST.SourceFile) -> Void) {
+func createSourceFile(name: String, path: String, block: (AST.SourceFile) -> Void) {
   let src = AST.SourceFile(path: path, name: name)
   block(src)
   try! src.generate()
